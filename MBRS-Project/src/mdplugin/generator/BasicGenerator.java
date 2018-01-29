@@ -37,6 +37,7 @@ public abstract class BasicGenerator {
 		this.outputFileName = generatorOptions.getOutputFileName();
 		this.overwrite = generatorOptions.getOverwrite();
 		this.filePackage = generatorOptions.getFilePackage();
+		
 	}
 
 	public void generate() throws IOException {		

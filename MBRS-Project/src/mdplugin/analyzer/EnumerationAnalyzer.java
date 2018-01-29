@@ -3,28 +3,16 @@ package mdplugin.analyzer;
 import java.util.Iterator;
 
 import com.nomagic.uml2.ext.jmi.helpers.StereotypesHelper;
-import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Class;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Enumeration;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package;
 
-import mdplugin.generator.fmmodel.FMClass;
 import mdplugin.generator.fmmodel.FMEnumeration;
 import mdplugin.generator.fmmodel.FMModel;
 
-/**
- * Model Analyzer takes necessary metadata from the MagicDraw model and puts it
- * in the intermediate data structure (@see myplugin.generator.fmmodel.FMModel)
- * optimized for code generation using freemarker. Model Analyzer now takes
- * metadata only for ejb code generation
- * 
- * @ToDo: Enhance (or completely rewrite) myplugin.generator.fmmodel classes and
- *        Model Analyzer methods in order to support GUI generation.
- */
+public class EnumerationAnalyzer extends BaseAnalyzer {
 
-public class ModelAnalyzer extends BaseAnalyzer {
-
-	public ModelAnalyzer(Package root, String filePackage) {
+	public EnumerationAnalyzer(Package root, String filePackage) {
 		super(root, filePackage);
 	}
 
@@ -42,19 +30,11 @@ public class ModelAnalyzer extends BaseAnalyzer {
 
 			for (Iterator<Element> it = pack.getOwnedElement().iterator(); it.hasNext();) {
 				Element ownedElement = it.next();
-				if (ownedElement instanceof Class) {
-					Class cl = (Class) ownedElement;
-					if (StereotypesHelper.getAppliedStereotypeByString(cl, "StandardForm") != null) {
-						FMClass fmClass = getClassData(cl, packageName, AnalyzerTypeEnum.MODEL);
-						FMModel.getInstance().getClasses().add(fmClass);
-					}
-				}
 
 				if (ownedElement instanceof Enumeration) {
 					Enumeration en = (Enumeration) ownedElement;
 					FMEnumeration fmEnumeration = getEnumerationData(en, packageName);
 					FMModel.getInstance().getEnumerations().add(fmEnumeration);
-
 				}
 			}
 
@@ -62,13 +42,12 @@ public class ModelAnalyzer extends BaseAnalyzer {
 				Element ownedElement = it.next();
 				if (ownedElement instanceof Package) {
 					Package ownedPackage = (Package) ownedElement;
-					if (StereotypesHelper.getAppliedStereotypeByString(ownedPackage, "BusinessApp") != null) {
-						// only packages with stereotype BusinessApp are candidates for metadata
-						// extraction and code generation:
+					if (StereotypesHelper.getAppliedStereotypeByString(ownedPackage, "BusinessApp") != null)
 						processPackage(ownedPackage, packageName);
-					}
 				}
+
 			}
+
 		}
 	}
 }

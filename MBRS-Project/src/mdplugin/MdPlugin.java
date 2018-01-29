@@ -28,10 +28,14 @@ public class MdPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		 * ProjectOptions.xml and take ejb generator options */		
 		
 		//for test purpose only:
-		GeneratorOptions ejbOptions = new GeneratorOptions("C:/Temp", "class", "FMTemplates", "{0}.java", true, "ejb"); 				
-		ProjectOptions.getProjectOptions().getGeneratorOptions().put("EJBGenerator", ejbOptions);
+		//GeneratorOptions ejbOptions = new GeneratorOptions("C:/Temp", "class", "FMTemplates", "{0}.java", true, "ejb");
+		GeneratorOptions enumerationOptions = new GeneratorOptions("C:/Temp", "enumeration", "FMTemplates", "{0}.java", true, "enumerations");
+		
+		//ProjectOptions.getProjectOptions().getGeneratorOptions().put("EJBGenerator", ejbOptions);
+		ProjectOptions.getProjectOptions().getGeneratorOptions().put("EnumerationGenerator", enumerationOptions);
 				
-		ejbOptions.setTemplateDir(pluginDir + File.separator + ejbOptions.getTemplateDir()); //apsolutna putanja
+		//ejbOptions.setTemplateDir(pluginDir + File.separator + ejbOptions.getTemplateDir()); //apsolutna putanja
+		enumerationOptions.setTemplateDir(pluginDir + File.separator + enumerationOptions.getTemplateDir());
 	}
 
 	private NMAction[] getSubmenuActions() {
