@@ -40,61 +40,65 @@ class GenerateAction extends MDAction {
 		if (root == null)
 			return;
 
-		//ModelAnalyzer analyzer = new ModelAnalyzer(root, "ejb");
-		//ActionModelAnalyzer actionsAnalyzer = new ActionModelAnalyzer(root, "gui.actions");
-		//StandardFormAnalyzer standardFormAnalizer = new StandardFormAnalyzer(root, "standardForm");
+		ModelAnalyzer modelAnalyzer = new ModelAnalyzer(root, "ejb");
+		// ActionModelAnalyzer actionsAnalyzer = new ActionModelAnalyzer(root,
+		// "gui.actions");
+		// StandardFormAnalyzer standardFormAnalizer = new StandardFormAnalyzer(root,
+		// "standardForm");
 		EnumerationAnalyzer enumerationAnalyzer = new EnumerationAnalyzer(root, "enumerations");
-		//DaoModelAnalyzer daoAnalyzer = new DaoModelAnalyzer(root, "dao");
-		//MenuModelAnalyzer menuAnalyzer = new MenuModelAnalyzer(root, "gui.actions");
-		//HibernateAnalyzer hibernateAnalyzer = new HibernateAnalyzer(root, "ejb");
+		// DaoModelAnalyzer daoAnalyzer = new DaoModelAnalyzer(root, "dao");
+		// MenuModelAnalyzer menuAnalyzer = new MenuModelAnalyzer(root, "gui.actions");
+		// HibernateAnalyzer hibernateAnalyzer = new HibernateAnalyzer(root, "ejb");
 
 		try {
-			/*analyzer.prepareModel();
+			modelAnalyzer.prepareModel();
 			GeneratorOptions go = ProjectOptions.getProjectOptions().getGeneratorOptions().get("EJBGenerator");
 			EJBGenerator ejbGenerator = new EJBGenerator(go);
-			ejbGenerator.generate();*/
+			ejbGenerator.generate();
 
-			/*standardFormAnalizer.prepareModel();
-			GeneratorOptions goForm = ProjectOptions.getProjectOptions().getGeneratorOptions()
-					.get("StandardFormGenerator");
-			StandardFormGenerator generateForm = new StandardFormGenerator(goForm);
-			generateForm.generate();
+			/*
+			 * standardFormAnalizer.prepareModel(); GeneratorOptions goForm =
+			 * ProjectOptions.getProjectOptions().getGeneratorOptions()
+			 * .get("StandardFormGenerator"); StandardFormGenerator generateForm = new
+			 * StandardFormGenerator(goForm); generateForm.generate();
+			 * 
+			 * daoAnalyzer.prepareModel(); GeneratorOptions goDao =
+			 * ProjectOptions.getProjectOptions().getGeneratorOptions().get("DaoGenerator");
+			 * DaoGenerator daoGenerator = new DaoGenerator(goDao); daoGenerator.generate();
+			 * 
+			 * GeneratorOptions hgoDao =
+			 * ProjectOptions.getProjectOptions().getGeneratorOptions()
+			 * .get("HibernateDaoGenerator"); DaoGenerator hdaoGenerator = new
+			 * DaoGenerator(hgoDao); hdaoGenerator.generate();
+			 */
 
-			daoAnalyzer.prepareModel();
-			GeneratorOptions goDao = ProjectOptions.getProjectOptions().getGeneratorOptions().get("DaoGenerator");
-			DaoGenerator daoGenerator = new DaoGenerator(goDao);
-			daoGenerator.generate();
+			
+			 enumerationAnalyzer.prepareModel(); GeneratorOptions goEnumeration =
+			 ProjectOptions.getProjectOptions().getGeneratorOptions()
+			 .get("EnumerationGenerator"); EnumerationGenerator generateEnumeration = new
+			 EnumerationGenerator(goEnumeration); generateEnumeration.generate();
+			 
 
-			GeneratorOptions hgoDao = ProjectOptions.getProjectOptions().getGeneratorOptions()
-					.get("HibernateDaoGenerator");
-			DaoGenerator hdaoGenerator = new DaoGenerator(hgoDao);
-			hdaoGenerator.generate();*/
-
-			enumerationAnalyzer.prepareModel();
-			GeneratorOptions goEnumeration = ProjectOptions.getProjectOptions().getGeneratorOptions()
-					.get("EnumerationGenerator");
-			EnumerationGenerator generateEnumeration = new EnumerationGenerator(goEnumeration);
-			generateEnumeration.generate();
-
-			/*actionsAnalyzer.prepareModel();
-			GeneratorOptions goAction = ProjectOptions.getProjectOptions().getGeneratorOptions().get("ActionGenerator");
-			ActionGenerator actionGenerator = new ActionGenerator(goAction);
-			actionGenerator.generate();
-
-			menuAnalyzer.prepareModel();
-			GeneratorOptions goMenu = ProjectOptions.getProjectOptions().getGeneratorOptions().get("MenuGenerator");
-			MenuGenerator menuGenerator = new MenuGenerator(goMenu);
-			menuGenerator.generate();
-
-			hibernateAnalyzer.prepareModel();
-			GeneratorOptions goHibernate = ProjectOptions.getProjectOptions().getGeneratorOptions()
-					.get("HibernateGenerator");
-			HibernateGenerator hibernateGenerator = new HibernateGenerator(goHibernate);
-			hibernateGenerator.generate();*/
+			/*
+			 * actionsAnalyzer.prepareModel(); GeneratorOptions goAction =
+			 * ProjectOptions.getProjectOptions().getGeneratorOptions().get(
+			 * "ActionGenerator"); ActionGenerator actionGenerator = new
+			 * ActionGenerator(goAction); actionGenerator.generate();
+			 * 
+			 * menuAnalyzer.prepareModel(); GeneratorOptions goMenu =
+			 * ProjectOptions.getProjectOptions().getGeneratorOptions().get("MenuGenerator")
+			 * ; MenuGenerator menuGenerator = new MenuGenerator(goMenu);
+			 * menuGenerator.generate();
+			 * 
+			 * hibernateAnalyzer.prepareModel(); GeneratorOptions goHibernate =
+			 * ProjectOptions.getProjectOptions().getGeneratorOptions()
+			 * .get("HibernateGenerator"); HibernateGenerator hibernateGenerator = new
+			 * HibernateGenerator(goHibernate); hibernateGenerator.generate();
+			 */
 
 			/** @ToDo: Also call other generators */
 			JOptionPane.showMessageDialog(null, "Code is successfully generated! Generated code is in folder: "
-					+ goEnumeration.getOutputPath() + " package: " + goEnumeration.getFilePackage());
+					+ go.getOutputPath() + " package: " + go.getFilePackage());
 
 			exportToXml();
 		} catch (AnalyzeException e) {

@@ -44,10 +44,10 @@ public class ModelAnalyzer extends BaseAnalyzer {
 				Element ownedElement = it.next();
 				if (ownedElement instanceof Class) {
 					Class cl = (Class) ownedElement;
-					if (StereotypesHelper.getAppliedStereotypeByString(cl, "StandardForm") != null) {
+					//if (StereotypesHelper.getAppliedStereotypeByString(cl, "StandardForm") != null) {
 						FMClass fmClass = getClassData(cl, packageName, AnalyzerTypeEnum.MODEL);
 						FMModel.getInstance().getClasses().add(fmClass);
-					}
+					//}
 				}
 
 				if (ownedElement instanceof Enumeration) {
