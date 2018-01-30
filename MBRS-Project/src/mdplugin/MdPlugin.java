@@ -35,12 +35,18 @@ public class MdPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		//for test purpose only:
 		GeneratorOptions ejbOptions = new GeneratorOptions(path, "class", "FMTemplates", "{0}.java", true, "ejb");
 		GeneratorOptions enumerationOptions = new GeneratorOptions(path, "enumeration", "FMTemplates", "{0}.java", true, "enumerations");
+		GeneratorOptions daoOptions = new GeneratorOptions(path, "dao", "FMTemplates", "{0}Dao.java", true, "dao");
+		GeneratorOptions hibernateOptions = new GeneratorOptions(path, "hibernateDao", "FMTemplates,", "{0}HibernateDao.java", true, "dao");
 		
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("EJBGenerator", ejbOptions);
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("EnumerationGenerator", enumerationOptions);
+		ProjectOptions.getProjectOptions().getGeneratorOptions().put("DaoGenerator", daoOptions);
+		ProjectOptions.getProjectOptions().getGeneratorOptions().put("HibernateGenerator", hibernateOptions);
 				
 		ejbOptions.setTemplateDir(pluginDir + File.separator + ejbOptions.getTemplateDir()); //apsolutna putanja
 		enumerationOptions.setTemplateDir(pluginDir + File.separator + enumerationOptions.getTemplateDir());
+		daoOptions.setTemplateDir(pluginDir + File.separator + daoOptions.getTemplateDir());
+		hibernateOptions.setTemplateDir(pluginDir + File.separator + hibernateOptions.getTemplateDir());
 	}
 
 	private NMAction[] getSubmenuActions() {
