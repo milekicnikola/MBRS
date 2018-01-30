@@ -22,9 +22,9 @@ import mdplugin.generator.fmmodel.FMModel;
  *        Model Analyzer methods in order to support GUI generation.
  */
 
-public class ModelAnalyzer extends BaseAnalyzer {
+public class ClassAnalyzer extends BaseAnalyzer {
 
-	public ModelAnalyzer(Package root, String filePackage) {
+	public ClassAnalyzer(Package root, String filePackage) {
 		super(root, filePackage);
 	}
 

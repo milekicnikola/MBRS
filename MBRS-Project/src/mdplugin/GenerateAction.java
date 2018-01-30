@@ -18,7 +18,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import mdplugin.analyzer.AnalyzeException;
 import mdplugin.analyzer.EnumerationAnalyzer;
-import mdplugin.analyzer.ModelAnalyzer;
+import mdplugin.analyzer.ClassAnalyzer;
 import mdplugin.generator.EJBGenerator;
 import mdplugin.generator.EnumerationGenerator;
 import mdplugin.generator.fmmodel.FMModel;
@@ -40,7 +40,7 @@ class GenerateAction extends MDAction {
 		if (root == null)
 			return;
 
-		ModelAnalyzer modelAnalyzer = new ModelAnalyzer(root, "ejb");
+		ClassAnalyzer modelAnalyzer = new ClassAnalyzer(root, "ejb");
 		// ActionModelAnalyzer actionsAnalyzer = new ActionModelAnalyzer(root,
 		// "gui.actions");
 		// StandardFormAnalyzer standardFormAnalizer = new StandardFormAnalyzer(root,

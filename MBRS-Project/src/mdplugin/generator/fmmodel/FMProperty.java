@@ -22,7 +22,7 @@ public class FMProperty extends FMElement {
 	// Added
 	protected Integer length;
 	protected Integer precision;
-	//protected ComponentKind componentKind;
+	// protected ComponentKind componentKind;
 	protected String toolTip;
 	// private String migLayout;
 	// private String migLabel;
@@ -95,13 +95,12 @@ public class FMProperty extends FMElement {
 		this.precision = precision;
 	}
 
-	/*public ComponentKind getComponentKind() {
-		return componentKind;
-	}
-
-	public void setComponentKind(ComponentKind componentKind) {
-		this.componentKind = componentKind;
-	}*/
+	/*
+	 * public ComponentKind getComponentKind() { return componentKind; }
+	 * 
+	 * public void setComponentKind(ComponentKind componentKind) {
+	 * this.componentKind = componentKind; }
+	 */
 
 	public String getToolTip() {
 		return toolTip;
