@@ -25,11 +25,16 @@ public class MdPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		manager.addMainMenuConfigurator(new MainMenuConfigurator(getSubmenuActions()));
 		
 		/** @Todo: load project options (@see myplugin.generator.options.ProjectOptions) from 
-		 * ProjectOptions.xml and take ejb generator options */		
+		 * ProjectOptions.xml and take ejb generator options */	
+		
+		String currentDir = System.getProperty("user.dir");
+		new File("/GeneratedApps").mkdirs();
+		String path = currentDir + "/GeneratedApp";
+		
 		
 		//for test purpose only:
-		GeneratorOptions ejbOptions = new GeneratorOptions("C:/Temp", "class", "FMTemplates", "{0}.java", true, "ejb");
-		GeneratorOptions enumerationOptions = new GeneratorOptions("C:/Temp", "enumeration", "FMTemplates", "{0}.java", true, "enumerations");
+		GeneratorOptions ejbOptions = new GeneratorOptions(path, "class", "FMTemplates", "{0}.java", true, "ejb");
+		GeneratorOptions enumerationOptions = new GeneratorOptions(path, "enumeration", "FMTemplates", "{0}.java", true, "enumerations");
 		
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("EJBGenerator", ejbOptions);
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("EnumerationGenerator", enumerationOptions);
