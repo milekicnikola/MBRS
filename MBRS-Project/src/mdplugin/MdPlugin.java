@@ -36,16 +36,19 @@ public class MdPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		GeneratorOptions enumerationOptions = new GeneratorOptions(path, "enumeration", "FMTemplates", "{0}.java", true, "enumerations");
 		GeneratorOptions daoOptions = new GeneratorOptions(path, "dao", "FMTemplates", "{0}Dao.java", true, "dao");
 		GeneratorOptions hibernateDaoOptions = new GeneratorOptions(path, "hibernateDao", "FMTemplates", "{0}HibernateDao.java", true, "dao");
+		GeneratorOptions hibernateConfigOptions = new GeneratorOptions(path, "hibernateConfig", "FMTemplates", "{0}.cfg.xml", true, "a");
 		
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("EJBGenerator", ejbOptions);
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("EnumerationGenerator", enumerationOptions);
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("DaoGenerator", daoOptions);
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("HibernateDaoGenerator", hibernateDaoOptions);
+		ProjectOptions.getProjectOptions().getGeneratorOptions().put("HibernateConfigGenerator", hibernateConfigOptions);
 				
 		ejbOptions.setTemplateDir(pluginDir + File.separator + ejbOptions.getTemplateDir()); //apsolutna putanja
 		enumerationOptions.setTemplateDir(pluginDir + File.separator + enumerationOptions.getTemplateDir());
 		daoOptions.setTemplateDir(pluginDir + File.separator + daoOptions.getTemplateDir());
 		hibernateDaoOptions.setTemplateDir(pluginDir + File.separator + hibernateDaoOptions.getTemplateDir());
+		hibernateConfigOptions.setTemplateDir(pluginDir + File.separator + hibernateConfigOptions.getTemplateDir());
 	}
 
 	private NMAction[] getSubmenuActions() {

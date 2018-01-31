@@ -4,6 +4,6 @@ import framework.DaoGeneric;
 import ${package}.*;
 </#list>
 
-${class.visibility} interface ${class.name}Dao extends GenericDao<${class.name}> {  
+${class.visibility} interface ${class.name}Dao extends DaoGeneric<${class.name}> {  
 
 }

@@ -20,9 +20,11 @@ import mdplugin.analyzer.AnalyzeException;
 import mdplugin.analyzer.ClassAnalyzer;
 import mdplugin.analyzer.DaoAnalyzer;
 import mdplugin.analyzer.EnumerationAnalyzer;
+import mdplugin.analyzer.HibernateAnalyzer;
 import mdplugin.generator.DaoGenerator;
 import mdplugin.generator.EJBGenerator;
 import mdplugin.generator.EnumerationGenerator;
+import mdplugin.generator.HibernateGenerator;
 import mdplugin.generator.fmmodel.FMModel;
 import mdplugin.generator.options.GeneratorOptions;
 import mdplugin.generator.options.ProjectOptions;
@@ -50,10 +52,9 @@ class GenerateAction extends MDAction {
 		EnumerationAnalyzer enumerationAnalyzer = new EnumerationAnalyzer(root, "enumerations");
 		DaoAnalyzer daoAnalyzer = new DaoAnalyzer(root, "dao");
 		// MenuModelAnalyzer menuAnalyzer = new MenuModelAnalyzer(root, "gui.actions");
-		// HibernateAnalyzer hibernateAnalyzer = new HibernateAnalyzer(root, "ejb");
+		HibernateAnalyzer hibernateAnalyzer = new HibernateAnalyzer(root, "ejb");
 
 		try {
-			
 
 			daoAnalyzer.prepareModel();
 			GeneratorOptions goDao = ProjectOptions.getProjectOptions().getGeneratorOptions().get("DaoGenerator");
@@ -78,7 +79,7 @@ class GenerateAction extends MDAction {
 					.get("EnumerationGenerator");
 			EnumerationGenerator enumerationGenerator = new EnumerationGenerator(goEnumeration);
 			enumerationGenerator.generate();
-			
+
 			modelAnalyzer.prepareModel();
 			GeneratorOptions go = ProjectOptions.getProjectOptions().getGeneratorOptions().get("EJBGenerator");
 			EJBGenerator ejbGenerator = new EJBGenerator(go);
@@ -95,12 +96,12 @@ class GenerateAction extends MDAction {
 			 * ; MenuGenerator menuGenerator = new MenuGenerator(goMenu);
 			 * menuGenerator.generate();
 			 */
-			/*
-			 * hibernateAnalyzer.prepareModel(); GeneratorOptions goHibernate =
-			 * ProjectOptions.getProjectOptions().getGeneratorOptions()
-			 * .get("HibernateGenerator"); HibernateGenerator hibernateGenerator = new
-			 * HibernateGenerator(goHibernate); hibernateGenerator.generate();
-			 */
+
+			hibernateAnalyzer.prepareModel();
+			GeneratorOptions goHibernate = ProjectOptions.getProjectOptions().getGeneratorOptions()
+					.get("HibernateConfigGenerator");
+			HibernateGenerator hibernateGenerator = new HibernateGenerator(goHibernate);
+			hibernateGenerator.generate();
 
 			/** @ToDo: Also call other generators */
 			JOptionPane.showMessageDialog(null, "Code is successfully generated! Generated code is in folder: "

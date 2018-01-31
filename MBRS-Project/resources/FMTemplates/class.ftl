@@ -26,7 +26,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "${class.name}")
-${class.visibility} class ${class.name} extends AbstractEntity implements Serializable {  
+${class.visibility} class ${class.name} extends EntityAbstract implements Serializable {  
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
