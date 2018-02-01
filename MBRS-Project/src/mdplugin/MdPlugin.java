@@ -37,18 +37,24 @@ public class MdPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		GeneratorOptions daoOptions = new GeneratorOptions(path, "dao", "FMTemplates", "{0}Dao.java", true, "dao");
 		GeneratorOptions hibernateDaoOptions = new GeneratorOptions(path, "hibernateDao", "FMTemplates", "{0}HibernateDao.java", true, "dao");
 		GeneratorOptions hibernateConfigOptions = new GeneratorOptions(path, "hibernateConfig", "FMTemplates", "{0}.cfg.xml", true, "a");
+		GeneratorOptions menuBarOptions = new GeneratorOptions(path, "menuBar", "FMTemplates", "{0}.java", true, "gui");
+		GeneratorOptions actionOptions = new GeneratorOptions(path, "action", "FMTemplates", "{0}Action.java", true, "gui.actions");
 		
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("EJBGenerator", ejbOptions);
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("EnumerationGenerator", enumerationOptions);
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("DaoGenerator", daoOptions);
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("HibernateDaoGenerator", hibernateDaoOptions);
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("HibernateConfigGenerator", hibernateConfigOptions);
+		ProjectOptions.getProjectOptions().getGeneratorOptions().put("MenuBarGenerator", menuBarOptions);
+		ProjectOptions.getProjectOptions().getGeneratorOptions().put("ActionGenerator", actionOptions);
 				
 		ejbOptions.setTemplateDir(pluginDir + File.separator + ejbOptions.getTemplateDir()); //apsolutna putanja
 		enumerationOptions.setTemplateDir(pluginDir + File.separator + enumerationOptions.getTemplateDir());
 		daoOptions.setTemplateDir(pluginDir + File.separator + daoOptions.getTemplateDir());
 		hibernateDaoOptions.setTemplateDir(pluginDir + File.separator + hibernateDaoOptions.getTemplateDir());
 		hibernateConfigOptions.setTemplateDir(pluginDir + File.separator + hibernateConfigOptions.getTemplateDir());
+		menuBarOptions.setTemplateDir(pluginDir + File.separator + menuBarOptions.getTemplateDir());
+		actionOptions.setTemplateDir(pluginDir + File.separator + actionOptions.getTemplateDir());
 	}
 
 	private NMAction[] getSubmenuActions() {

@@ -16,15 +16,19 @@ import com.nomagic.uml2.ext.magicdraw.auxiliaryconstructs.mdmodels.Model;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
+import mdplugin.analyzer.ActionAnalyzer;
 import mdplugin.analyzer.AnalyzeException;
 import mdplugin.analyzer.ClassAnalyzer;
 import mdplugin.analyzer.DaoAnalyzer;
 import mdplugin.analyzer.EnumerationAnalyzer;
 import mdplugin.analyzer.HibernateAnalyzer;
+import mdplugin.analyzer.MenuBarAnalyzer;
+import mdplugin.generator.ActionGenerator;
 import mdplugin.generator.DaoGenerator;
 import mdplugin.generator.EJBGenerator;
 import mdplugin.generator.EnumerationGenerator;
 import mdplugin.generator.HibernateGenerator;
+import mdplugin.generator.MenuBarGenerator;
 import mdplugin.generator.fmmodel.FMModel;
 import mdplugin.generator.options.GeneratorOptions;
 import mdplugin.generator.options.ProjectOptions;
@@ -45,13 +49,12 @@ class GenerateAction extends MDAction {
 			return;
 
 		ClassAnalyzer modelAnalyzer = new ClassAnalyzer(root, "ejb");
-		// ActionModelAnalyzer actionsAnalyzer = new ActionModelAnalyzer(root,
-		// "gui.actions");
+		ActionAnalyzer actionAnalyzer = new ActionAnalyzer(root, "gui.actions");
 		// StandardFormAnalyzer standardFormAnalizer = new StandardFormAnalyzer(root,
 		// "standardForm");
 		EnumerationAnalyzer enumerationAnalyzer = new EnumerationAnalyzer(root, "enumerations");
 		DaoAnalyzer daoAnalyzer = new DaoAnalyzer(root, "dao");
-		// MenuModelAnalyzer menuAnalyzer = new MenuModelAnalyzer(root, "gui.actions");
+		MenuBarAnalyzer menuBarAnalyzer = new MenuBarAnalyzer(root, "gui");
 		HibernateAnalyzer hibernateAnalyzer = new HibernateAnalyzer(root, "ejb");
 
 		try {
@@ -85,17 +88,16 @@ class GenerateAction extends MDAction {
 			EJBGenerator ejbGenerator = new EJBGenerator(go);
 			ejbGenerator.generate();
 
-			/*
-			 * actionsAnalyzer.prepareModel(); GeneratorOptions goAction =
-			 * ProjectOptions.getProjectOptions().getGeneratorOptions().get(
-			 * "ActionGenerator"); ActionGenerator actionGenerator = new
-			 * ActionGenerator(goAction); actionGenerator.generate();
-			 * 
-			 * menuAnalyzer.prepareModel(); GeneratorOptions goMenu =
-			 * ProjectOptions.getProjectOptions().getGeneratorOptions().get("MenuGenerator")
-			 * ; MenuGenerator menuGenerator = new MenuGenerator(goMenu);
-			 * menuGenerator.generate();
-			 */
+			actionAnalyzer.prepareModel();
+			GeneratorOptions goAction = ProjectOptions.getProjectOptions().getGeneratorOptions().get("ActionGenerator");
+			ActionGenerator actionGenerator = new ActionGenerator(goAction);
+			actionGenerator.generate();
+
+			menuBarAnalyzer.prepareModel();
+			GeneratorOptions goMenuBar = ProjectOptions.getProjectOptions().getGeneratorOptions()
+					.get("MenuBarGenerator");
+			MenuBarGenerator menuBarGenerator = new MenuBarGenerator(goMenuBar);
+			menuBarGenerator.generate();
 
 			hibernateAnalyzer.prepareModel();
 			GeneratorOptions goHibernate = ProjectOptions.getProjectOptions().getGeneratorOptions()
@@ -105,7 +107,7 @@ class GenerateAction extends MDAction {
 
 			/** @ToDo: Also call other generators */
 			JOptionPane.showMessageDialog(null, "Code is successfully generated! Generated code is in folder: "
-					+ go.getOutputPath() + " package: " + go.getFilePackage());
+					+ go.getOutputPath());
 
 			exportToXml();
 		} catch (AnalyzeException e) {
