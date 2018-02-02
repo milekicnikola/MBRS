@@ -8,9 +8,9 @@ import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
 
-import framework.GenericStandardForm;
+import framework.StandardForm;
 import framework.MainFrame;
-import framework.ReportUtil;
+//import framework.ReportUtil;
 
 <#list class.importedPackages as package>
 import ${package}.*;
@@ -38,11 +38,14 @@ ${class.visibility} class ${class.name}Action extends AbstractAction {
 		${class.name}HibernateDao dao = new ${class.name}HibernateDao();
 		//${class.name}Panel panel = new ${class.name}Panel();
 		//String reportPath = ReportUtil.getReportFilePath("${class.name}");
+		String reportPath = "";
+		JPanel panel = new JPanel();
 		
-		//GenericStandardForm form = new GenericStandardForm(${class.name?lower_case}, dao , panel, reportPath);
+		//StandardForm form = new StandardForm(${class.name?lower_case}, dao , panel, reportPath);
+		StandardForm form = new StandardForm(${class.name?lower_case}, dao , panel);
 		
-		//form.setModal(true);
-		//form.setLocationRelativeTo(null);
-		//form.setVisible(true);
+		form.setModal(true);
+		form.setLocationRelativeTo(null);
+		form.setVisible(true);
 	}
 }

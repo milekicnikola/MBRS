@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import util.MenuBar;
+
 public class MainFrame extends JFrame {
 
 	public MainFrame() {

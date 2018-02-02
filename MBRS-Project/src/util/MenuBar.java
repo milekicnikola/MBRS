@@ -1,4 +1,4 @@
-package framework;
+package util;
 
 import javax.swing.JMenuBar;
 

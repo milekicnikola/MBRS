@@ -39,7 +39,7 @@ public class ActionAnalyzer extends BaseAnalyzer{
 						FMClass fmClass = getClassData(cl, packageName, AnalyzerTypeEnum.ACTION);
 						fmClass.addImportedPackage(Resources.IMPORT_EJB_PREFIX + getImportedPackage("", pack, AnalyzerTypeEnum.ACTION) + "." + pack.getName());
 						fmClass.addImportedPackage(Resources.IMPORT_DAO_PREFIX + getImportedPackage("", pack, AnalyzerTypeEnum.ACTION) + "." + pack.getName());
-						fmClass.addImportedPackage(Resources.IMPORT_STANDARD_FORM_PREFIX + getImportedPackage("", pack, AnalyzerTypeEnum.ACTION) + "." + pack.getName());
+						//fmClass.addImportedPackage(Resources.IMPORT_STANDARD_FORM_PREFIX + getImportedPackage("", pack, AnalyzerTypeEnum.ACTION) + "." + pack.getName());
 						
 						String s = getTagValue(cl,StereotypesHelper.getAppliedStereotypeByString(cl, "StandardForm"),"tooltip");
 						if(s != null){
