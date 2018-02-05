@@ -1,5 +1,7 @@
 package mdplugin.generator.fmmodel;
 
+import util.ComponentKind;
+
 public class FMProperty extends FMElement {
 	// Property type
 	private String type;
@@ -13,6 +15,19 @@ public class FMProperty extends FMElement {
 	private String relationshipAnnotation;
 	private String joinColumnAnnotation;
 
+	private Boolean foreignKey = false;
+	private Boolean isBoolean = false;
+	//private Boolean isEnumeration = false;
+	//private Integer textWidth;
+	//private Boolean isTextField = true;
+	private Boolean isDate = false;
+	//private Boolean isTextArea = false;
+	private String packagePath;
+	private Boolean isInteger = false;
+	private Boolean isReal = false;
+
+	protected String lblName;
+
 	/**
 	 * @ToDo: Add length, precision, unique... whatever is needed for ejb class
 	 *        generation Also, provide these meta-attributes or tags in the modeling
@@ -22,7 +37,7 @@ public class FMProperty extends FMElement {
 	// Added
 	protected Integer length;
 	protected Integer precision;
-	// protected ComponentKind componentKind;
+	protected ComponentKind componentKind;
 	protected String toolTip;
 	// private String migLayout;
 	// private String migLabel;
@@ -205,6 +220,102 @@ public class FMProperty extends FMElement {
 
 	public void setIsEnumerated(Boolean isEnumerated) {
 		this.isEnumerated = isEnumerated;
+	}
+
+	public Boolean getForeignKey() {
+		return foreignKey;
+	}
+
+	public void setForeignKey(Boolean foreignKey) {
+		this.foreignKey = foreignKey;
+	}
+
+/*	public Integer getTextWidth() {
+		return textWidth;
+	}
+
+	public void setTextWidth(Integer textWidth) {
+		this.textWidth = textWidth;
+	}*/
+
+	public String getPackagePath() {
+		return packagePath;
+	}
+
+	public void setPackagePath(String packagePath) {
+		this.packagePath = packagePath;
+	}
+
+	public String getLblName() {
+		return lblName;
+	}
+
+	public void setLblName(String lblName) {
+		this.lblName = lblName;
+	}
+
+	public ComponentKind getComponentKind() {
+		return componentKind;
+	}
+
+	public void setComponentKind(ComponentKind componentKind) {
+		this.componentKind = componentKind;
+	}
+
+	public Boolean getIsBoolean() {
+		return isBoolean;
+	}
+
+	public void setIsBoolean(Boolean isBoolean) {
+		this.isBoolean = isBoolean;
+	}
+
+	/*public Boolean getIsEnumeration() {
+		return isEnumeration;
+	}
+
+	public void setIsEnumeration(Boolean isEnumeration) {
+		this.isEnumeration = isEnumeration;
+	}*/
+
+	/*public Boolean getIsTextField() {
+		return isTextField;
+	}
+
+	public void setIsTextField(Boolean isTextField) {
+		this.isTextField = isTextField;
+	}*/
+
+	public Boolean getIsDate() {
+		return isDate;
+	}
+
+	public void setIsDate(Boolean isDate) {
+		this.isDate = isDate;
+	}
+
+	/*public Boolean getIsTextArea() {
+		return isTextArea;
+	}
+
+	public void setIsTextArea(Boolean isTextArea) {
+		this.isTextArea = isTextArea;
+	}*/
+
+	public Boolean getIsInteger() {
+		return isInteger;
+	}
+
+	public void setIsInteger(Boolean isInteger) {
+		this.isInteger = isInteger;
+	}
+
+	public Boolean getIsReal() {
+		return isReal;
+	}
+
+	public void setIsReal(Boolean isReal) {
+		this.isReal = isReal;
 	}
 
 }

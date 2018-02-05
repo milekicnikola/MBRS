@@ -23,12 +23,14 @@ import mdplugin.analyzer.DaoAnalyzer;
 import mdplugin.analyzer.EnumerationAnalyzer;
 import mdplugin.analyzer.HibernateAnalyzer;
 import mdplugin.analyzer.MenuBarAnalyzer;
+import mdplugin.analyzer.PanelAnalyzer;
 import mdplugin.generator.ActionGenerator;
 import mdplugin.generator.DaoGenerator;
 import mdplugin.generator.EJBGenerator;
 import mdplugin.generator.EnumerationGenerator;
 import mdplugin.generator.HibernateGenerator;
 import mdplugin.generator.MenuBarGenerator;
+import mdplugin.generator.PanelGenerator;
 import mdplugin.generator.fmmodel.FMModel;
 import mdplugin.generator.options.GeneratorOptions;
 import mdplugin.generator.options.ProjectOptions;
@@ -50,8 +52,7 @@ class GenerateAction extends MDAction {
 
 		ClassAnalyzer modelAnalyzer = new ClassAnalyzer(root, "ejb");
 		ActionAnalyzer actionAnalyzer = new ActionAnalyzer(root, "gui.actions");
-		// StandardFormAnalyzer standardFormAnalizer = new StandardFormAnalyzer(root,
-		// "standardForm");
+		PanelAnalyzer panelAnalizer = new PanelAnalyzer(root, "standardForm");
 		EnumerationAnalyzer enumerationAnalyzer = new EnumerationAnalyzer(root, "enumerations");
 		DaoAnalyzer daoAnalyzer = new DaoAnalyzer(root, "dao");
 		MenuBarAnalyzer menuBarAnalyzer = new MenuBarAnalyzer(root, "gui");
@@ -64,14 +65,15 @@ class GenerateAction extends MDAction {
 			DaoGenerator daoGenerator = new DaoGenerator(goDao);
 			daoGenerator.generate();
 
-			/*
-			 * standardFormAnalizer.prepareModel(); GeneratorOptions goForm =
-			 * ProjectOptions.getProjectOptions().getGeneratorOptions()
-			 * .get("StandardFormGenerator"); StandardFormGenerator generateForm = new
-			 * StandardFormGenerator(goForm); generateForm.generate();
-			 * 
-			 * 
-			 */
+			
+			panelAnalizer.prepareModel();
+			GeneratorOptions goPanel = ProjectOptions.getProjectOptions().getGeneratorOptions()
+			.get("PanelGenerator");
+			PanelGenerator generatePanel = new
+			PanelGenerator(goPanel);
+			generatePanel.generate();
+			
+			
 			GeneratorOptions goHibernateDao = ProjectOptions.getProjectOptions().getGeneratorOptions()
 					.get("HibernateDaoGenerator");
 			DaoGenerator hibernateDaoGenerator = new DaoGenerator(goHibernateDao);

@@ -39,6 +39,7 @@ public class MdPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		GeneratorOptions hibernateConfigOptions = new GeneratorOptions(path, "hibernateConfig", "FMTemplates", "{0}.cfg.xml", true, "a");
 		GeneratorOptions menuBarOptions = new GeneratorOptions(path, "menuBar", "FMTemplates", "{0}.java", true, "gui");
 		GeneratorOptions actionOptions = new GeneratorOptions(path, "action", "FMTemplates", "{0}Action.java", true, "gui.actions");
+		GeneratorOptions panelOptions = new GeneratorOptions(path, "panel", "FMTemplates", "{0}Panel.java", true, "standardForm");
 		
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("EJBGenerator", ejbOptions);
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("EnumerationGenerator", enumerationOptions);
@@ -47,7 +48,8 @@ public class MdPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("HibernateConfigGenerator", hibernateConfigOptions);
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("MenuBarGenerator", menuBarOptions);
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("ActionGenerator", actionOptions);
-				
+		ProjectOptions.getProjectOptions().getGeneratorOptions().put("PanelGenerator", panelOptions);
+		
 		ejbOptions.setTemplateDir(pluginDir + File.separator + ejbOptions.getTemplateDir()); //apsolutna putanja
 		enumerationOptions.setTemplateDir(pluginDir + File.separator + enumerationOptions.getTemplateDir());
 		daoOptions.setTemplateDir(pluginDir + File.separator + daoOptions.getTemplateDir());
@@ -55,6 +57,7 @@ public class MdPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		hibernateConfigOptions.setTemplateDir(pluginDir + File.separator + hibernateConfigOptions.getTemplateDir());
 		menuBarOptions.setTemplateDir(pluginDir + File.separator + menuBarOptions.getTemplateDir());
 		actionOptions.setTemplateDir(pluginDir + File.separator + actionOptions.getTemplateDir());
+		panelOptions.setTemplateDir(pluginDir + File.separator + panelOptions.getTemplateDir());
 	}
 
 	private NMAction[] getSubmenuActions() {

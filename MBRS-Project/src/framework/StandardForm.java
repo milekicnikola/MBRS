@@ -18,7 +18,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import javax.help.search.SearchEngine;
 import javax.swing.ComboBoxModel;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -36,8 +35,6 @@ import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.text.JTextComponent;
-
-import org.apache.batik.dom.AbstractEntity;
 
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 
