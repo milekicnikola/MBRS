@@ -36,10 +36,10 @@ ${class.visibility} class ${class.name}Action extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 		${class.name} ${class.name?lower_case} = new ${class.name}();
 		${class.name}HibernateDao dao = new ${class.name}HibernateDao();
-		//${class.name}Panel panel = new ${class.name}Panel();
+		${class.name}Panel panel = new ${class.name}Panel();
 		//String reportPath = ReportUtil.getReportFilePath("${class.name}");
 		String reportPath = "";
-		JPanel panel = new JPanel();
+		//JPanel panel = new JPanel();
 		
 		//StandardForm form = new StandardForm(${class.name?lower_case}, dao , panel, reportPath);
 		StandardForm form = new StandardForm(${class.name?lower_case}, dao , panel);

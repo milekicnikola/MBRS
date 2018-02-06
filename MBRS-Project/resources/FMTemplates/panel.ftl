@@ -41,15 +41,16 @@ ${class.visibility} class ${class.name}Panel extends JPanel{
 
 	
 	<#list properties as property>
+		
 		<#if property.upper == 1 && property.foreignKey == false && property.isBoolean == false && property.component != "comboBox" && property.component != "textArea"> 
 			<#if property.component == "textField">
 				private  JTextField tf${property.name} = new JTextField(${property.length});
 			<#else>
 				private  JTextField tf${property.name} = new JTextField(10);
 			</#if>
-	   		private  JLabel     lbl${property.name} = new JLabel("${property.lblName}<#if property.required == true >*</#if>");
-	    </#if> 
-	    
+		   	private  JLabel     lbl${property.name} = new JLabel("${property.lblName}<#if property.required == true >*</#if>");
+	    </#if>
+	    	    
 	    <#if property.upper == 1 && property.foreignKey == true >   
 	   		private JComboBox  combo${property.name} = new JComboBox();
 	   		private  JLabel     lbl${property.name} = new JLabel("${property.lblName}<#if property.required == true >*</#if>");
@@ -58,17 +59,18 @@ ${class.visibility} class ${class.name}Panel extends JPanel{
 	   <#if property.upper == 1 && property.isBoolean == true>   
 	  		private JCheckBox check${property.name} = new JCheckBox();
 	   		private  JLabel     lbl${property.name} = new JLabel("${property.lblName}<#if property.required == true >*</#if>");
-	    </#if> 
+	    </#if> 	    
 	    
-	    <#if property.upper == 1  && property.component == "enumerated" >   
-	  		private JComboBox  combo${property.name} = new JComboBox(${property.type}.values());
-	   		private  JLabel     lbl${property.name} = new JLabel("${property.lblName}<#if property.required == true >*</#if>");
-	    </#if>
+		<#if property.upper == 1  && property.component == "comboBox" >   
+		  	private JComboBox  combo${property.name} = new JComboBox(${property.type}.values());
+			private  JLabel     lbl${property.name} = new JLabel("${property.lblName}<#if property.required == true >*</#if>");
+		</#if>	  	    
 	    
-	    <#if property.upper == 1  && property.component == "textArea" >   
-	  		private JTextArea  textArea${property.name} = new JTextArea();
-	   		private  JLabel     lbl${property.name} = new JLabel("${property.lblName}<#if property.required == true >*</#if>");
-	    </#if>
+		<#if property.upper == 1  && property.component == "textArea" >   
+		 	private JTextArea  textArea${property.name} = new JTextArea();
+		   	private  JLabel     lbl${property.name} = new JLabel("${property.lblName}<#if property.required == true >*</#if>");
+		</#if>
+	    
 	</#list>
 	
 	private JButton btnCancel = new JButton();
@@ -84,34 +86,34 @@ ${class.visibility} class ${class.name}Panel extends JPanel{
 		add(new JLabel(""),"wrap 20");
 		<#list properties as property>
 			<#if property.upper == 1 && property.foreignKey == false && property.isBoolean == false && property.component != "comboBox"  && property.component != "textArea">   
-					add(lbl${property.name},"gapleft 30");
-					<#if property.component == "textField" >
-						lbl${property.name}.setName("${property.name}");
-						tf${property.name}.addKeyListener(new TextFieldWidth(${property.length}));
-						tf${property.name}.setSize(new Dimension(${property.length}, tf${property.name}.getHeight()));
-						tf${property.name}.setName("${property.name}");
-						add(tf${property.name},"grow 0,wrap 20");
-						<#if property.isInteger == true >
-							TextField text${property.name} = new TextField(1);
-							text${property.name}.setName("${property.name}");
-							text${property.name}.setText("I");
-							text${property.name}.setVisible(false);
-							add(text${property.name},"grow 0,hidemode 3");
-						<#elseif property.isReal == true>
-							TextField text${property.name} = new TextField(1);
-							text${property.name}.setName("${property.name}");
-							text${property.name}.setText("R");
-							text${property.name}.setVisible(false);
-							add(text${property.name},"grow 0,hidemode 3");
-						</#if>
-					<#elseif property.isDate == true>
-						lbl${property.name}.setName("${property.name}");
-						UtilDateModel model${property.name} = new UtilDateModel();
-						JDatePanelImpl datePanel${property.name} = new JDatePanelImpl(model${property.name});
-						JDatePickerImpl datePicker${property.name} = new JDatePickerImpl(datePanel${property.name});
-						datePicker${property.name}.setName("${property.name}");
-						add(datePicker${property.name},"grow 0,wrap 20");
+				add(lbl${property.name},"gapleft 30");
+				<#if property.component == "textField" >
+					lbl${property.name}.setName("${property.name}");
+					tf${property.name}.addKeyListener(new TextFieldWidth(${property.length}));
+					tf${property.name}.setSize(new Dimension(${property.length}, tf${property.name}.getHeight()));
+					tf${property.name}.setName("${property.name}");
+					add(tf${property.name},"grow 0,wrap 20");
+					<#if property.isInteger == true >
+						TextField text${property.name} = new TextField(1);
+						text${property.name}.setName("${property.name}");
+						text${property.name}.setText("I");
+						text${property.name}.setVisible(false);
+						add(text${property.name},"grow 0,hidemode 3");
+					<#elseif property.isReal == true>
+						TextField text${property.name} = new TextField(1);
+						text${property.name}.setName("${property.name}");
+						text${property.name}.setText("R");
+						text${property.name}.setVisible(false);
+						add(text${property.name},"grow 0,hidemode 3");
 					</#if>
+				<#elseif property.isDate == true>
+					lbl${property.name}.setName("${property.name}");
+					UtilDateModel model${property.name} = new UtilDateModel();
+					JDatePanelImpl datePanel${property.name} = new JDatePanelImpl(model${property.name});
+					JDatePickerImpl datePicker${property.name} = new JDatePickerImpl(datePanel${property.name});
+					datePicker${property.name}.setName("${property.name}");
+					add(datePicker${property.name},"grow 0,wrap 20");
+		    	</#if>
 		    </#if> 
 		    <#if property.upper == 1 && property.foreignKey == true >   
 				add(lbl${property.name},"gapleft 30");
@@ -147,14 +149,14 @@ ${class.visibility} class ${class.name}Panel extends JPanel{
 				add(check${property.name},"grow 0,wrap 20");
 		    </#if> 
 		    
-	      	<#if property.upper == 1 && property.component == "comboBox" >   
+		    <#if property.upper == 1 && property.component == "comboBox" >   
 				add(lbl${property.name},"gapleft 30");
 				lbl${property.name}.setName("${property.name}");
 				combo${property.name}.setName("${property.name}");
-				add(combo${property.name},"grow 0,wrap 20");
+				add(combo${property.name},"grow 0,wrap 20");			    
 		    </#if> 
 		    
-		    <#if property.upper == 1 && property.component == "textArea">   
+			<#if property.upper == 1 && property.component == "textArea">   
 				add(lbl${property.name},"gapleft 30");
 				lbl${property.name}.setName("${property.name}");
 				textArea${property.name}.addKeyListener(new TextFieldWidth(${property.length}));
@@ -164,8 +166,8 @@ ${class.visibility} class ${class.name}Panel extends JPanel{
 				JScrollPane areaScrollPane${property.name} = new JScrollPane(textArea${property.name});
 				areaScrollPane${property.name}.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 				areaScrollPane${property.name}.setPreferredSize(new Dimension(400, 100));
-				add(areaScrollPane${property.name},"grow 0,wrap 20");
-		    </#if> 
+				add(areaScrollPane${property.name},"grow 0,wrap 20"); 
+		    </#if>
 		</#list>
 		
 	}

@@ -37,7 +37,7 @@ public class FMProperty extends FMElement {
 	// Added
 	protected Integer length;
 	protected Integer precision;
-	protected ComponentKind componentKind;
+	protected ComponentKind component;
 	protected String toolTip;
 	// private String migLayout;
 	// private String migLabel;
@@ -254,12 +254,12 @@ public class FMProperty extends FMElement {
 		this.lblName = lblName;
 	}
 
-	public ComponentKind getComponentKind() {
-		return componentKind;
+	public ComponentKind getComponent() {
+		return component;
 	}
 
-	public void setComponentKind(ComponentKind componentKind) {
-		this.componentKind = componentKind;
+	public void setComponentKind(ComponentKind component) {
+		this.component = component;
 	}
 
 	public Boolean getIsBoolean() {
