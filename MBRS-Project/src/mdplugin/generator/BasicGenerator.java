@@ -92,9 +92,6 @@ public abstract class BasicGenerator {
 						+ outputPath);
 			}
 
-		System.out.println(of.getPath());
-		System.out.println(of.getName());
-
 		if (!isOverwrite() && of.exists())
 			return null;
 

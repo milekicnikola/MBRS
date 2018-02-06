@@ -35,11 +35,11 @@ public class ActionAnalyzer extends BaseAnalyzer{
 				Element ownedElement = it.next();
 				if (ownedElement instanceof Class) {
 					Class cl = (Class)ownedElement;
-					//if(StereotypesHelper.getAppliedStereotypeByString(cl, "StandardForm") != null) {
+					if(StereotypesHelper.getAppliedStereotypeByString(cl, "StandardForm") != null) {
 						FMClass fmClass = getClassData(cl, packageName, AnalyzerTypeEnum.ACTION);
 						fmClass.addImportedPackage(Resources.IMPORT_EJB_PREFIX + getImportedPackage("", pack, AnalyzerTypeEnum.ACTION) + "." + pack.getName());
 						fmClass.addImportedPackage(Resources.IMPORT_DAO_PREFIX + getImportedPackage("", pack, AnalyzerTypeEnum.ACTION) + "." + pack.getName());
-						//fmClass.addImportedPackage(Resources.IMPORT_STANDARD_FORM_PREFIX + getImportedPackage("", pack, AnalyzerTypeEnum.ACTION) + "." + pack.getName());
+						fmClass.addImportedPackage(Resources.IMPORT_STANDARD_FORM_PREFIX + getImportedPackage("", pack, AnalyzerTypeEnum.ACTION) + "." + pack.getName());
 						
 						String s = getTagValue(cl,StereotypesHelper.getAppliedStereotypeByString(cl, "StandardForm"),"tooltip");
 						if(s != null){
@@ -47,7 +47,7 @@ public class ActionAnalyzer extends BaseAnalyzer{
 						}
 						
 						FMModel.getInstance().getClasses().add(fmClass);	
-					//}
+					}
 				}
 			}
 			

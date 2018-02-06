@@ -101,12 +101,12 @@ public class PanelAnalyzer extends BaseAnalyzer {
 
 		FMProperty prop = new FMProperty(attName, typeName, p.getVisibility().toString(), lower, upper);
 
-		/*if (getTagValue(p, StereotypesHelper.getAppliedStereotypeByString(p, Resources.UI_PROPERTY), "label") != null) {
-			prop.setLblName(
-					getTagValue(p, StereotypesHelper.getAppliedStereotypeByString(p, Resources.UI_PROPERTY), "label"));
-		} else {
-			prop.setLblName(prop.getName());
-		}*/
+		/*
+		 * if (getTagValue(p, StereotypesHelper.getAppliedStereotypeByString(p,
+		 * Resources.UI_PROPERTY), "label") != null) { prop.setLblName( getTagValue(p,
+		 * StereotypesHelper.getAppliedStereotypeByString(p, Resources.UI_PROPERTY),
+		 * "label")); } else { prop.setLblName(prop.getName()); }
+		 */
 
 		if (typeName.equals("Boolean")) {
 
@@ -138,7 +138,7 @@ public class PanelAnalyzer extends BaseAnalyzer {
 					prop.setPackagePath(getImportedPackage(attType.getPackage().getName(), attType.getPackage(),
 							AnalyzerTypeEnum.STANDARDFORM));
 
-					//if (StereotypesHelper.getAppliedStereotypeByString(p, Resources.UI_PROPERTY) != null) {
+					if (StereotypesHelper.getAppliedStereotypeByString(p, Resources.UI_PROPERTY) != null) {
 						Stereotype propStereotypeUI = StereotypesHelper.getAppliedStereotypeByString(p,
 								Resources.UI_PROPERTY);
 						String isRequired = getTagValue(p, propStereotypeUI, "required");
@@ -150,7 +150,8 @@ public class PanelAnalyzer extends BaseAnalyzer {
 							}
 
 						}
-					//}
+					}
+
 				}
 			}
 		}
@@ -158,95 +159,94 @@ public class PanelAnalyzer extends BaseAnalyzer {
 		/**
 		 * Obrada stored property stereotipa
 		 */
-		// if(StereotypesHelper.getAppliedStereotypeByString(p,
-		// Resources.STORED_PROPERTY) != null) {
-		Stereotype propStereotype = StereotypesHelper.getAppliedStereotypeByString(p, Resources.UI_PROPERTY);
-		if (getTagValue(p, propStereotype, "label") != null) {
-			prop.setLblName(getTagValue(p, propStereotype, "label"));
-		} else {
-			prop.setLblName(prop.getName());
-		}
+		if (StereotypesHelper.getAppliedStereotypeByString(p, Resources.UI_PROPERTY) != null) {
+			Stereotype propStereotype = StereotypesHelper.getAppliedStereotypeByString(p, Resources.UI_PROPERTY);
+			if (getTagValue(p, propStereotype, "label") != null) {
+				prop.setLblName(getTagValue(p, propStereotype, "label"));
+			} else {
+				prop.setLblName(prop.getName());
+			}
 
-		prop.setRequired(new Boolean(getTagValue(p, propStereotype, "required")));
+			prop.setRequired(new Boolean(getTagValue(p, propStereotype, "required")));
 
-		/*
-		 * String isTextField = getTagValue(p,propStereotype,"isTextField");
-		 * 
-		 * if(isTextField!= null){
-		 * 
-		 * if(isTextField.equals("true")){ prop.setIsTextField(true); }else
-		 * if(isTextField.equals("false")){ prop.setIsTextField(false); } }
-		 * 
-		 * 
-		 * String isTextArea = getTagValue(p,propStereotype,"isTextArea");
-		 * 
-		 * if(isTextArea!= null){
-		 * 
-		 * if(isTextArea.equals("true")){ prop.setIsTextArea(true); }else
-		 * if(isTextArea.equals("false")){ prop.setIsTextArea(false); } }
-		 */
+			/*
+			 * String isTextField = getTagValue(p,propStereotype,"isTextField");
+			 * 
+			 * if(isTextField!= null){
+			 * 
+			 * if(isTextField.equals("true")){ prop.setIsTextField(true); }else
+			 * if(isTextField.equals("false")){ prop.setIsTextField(false); } }
+			 * 
+			 * 
+			 * String isTextArea = getTagValue(p,propStereotype,"isTextArea");
+			 * 
+			 * if(isTextArea!= null){
+			 * 
+			 * if(isTextArea.equals("true")){ prop.setIsTextArea(true); }else
+			 * if(isTextArea.equals("false")){ prop.setIsTextArea(false); } }
+			 */
 
-		String lengthString = getTagValue(p, propStereotype, "length");
-		if (lengthString == null) {
-			prop.setLength(null);
-		} else {
-			prop.setLength(Integer.parseInt(getTagValue(p, propStereotype, "length")));
-		}
+			String lengthString = getTagValue(p, propStereotype, "length");
+			if (lengthString == null) {
+				prop.setLength(null);
+			} else {
+				prop.setLength(Integer.parseInt(getTagValue(p, propStereotype, "length")));
+			}
 
-		String precisionString = getTagValue(p, propStereotype, "precision");
-		if (precisionString == null)
-			prop.setPrecision(null);
-		else
-			prop.setPrecision(Integer.parseInt(getTagValue(p, propStereotype, "precision")));
-
-		String componentKindString = "";
-		if ((getTagValue(p, propStereotype, "component")) != null) {
-			componentKindString = getTagValue(p, propStereotype, "component");
-
-			if (componentKindString == "textField")
-				prop.setComponentKind(ComponentKind.textField);
-			else if (componentKindString == "textArea")
-				prop.setComponentKind(ComponentKind.textArea);
-			else if (componentKindString == "editor")
-				prop.setComponentKind(ComponentKind.editor);
-			else if (componentKindString == "comboBox")
-				prop.setComponentKind(ComponentKind.comboBox);
-			else if (componentKindString == "checkBox")
-				prop.setComponentKind(ComponentKind.checkBox);
-			else if (componentKindString == "dateChooser")
-				prop.setComponentKind(ComponentKind.dateChooser);
+			String precisionString = getTagValue(p, propStereotype, "precision");
+			if (precisionString == null)
+				prop.setPrecision(null);
 			else
-				prop.setComponentKind(ComponentKind.valueOf(componentKindString));
-		}
+				prop.setPrecision(Integer.parseInt(getTagValue(p, propStereotype, "precision")));
 
-		prop.setToolTip(getTagValue(p, propStereotype, "toolTip"));
-		// prop.setMigLayout(getTagValue(p,propStereotype,"migLayout"));
-		// prop.setMigLabel(getTagValue(p,propStereotype,"migLabel"));
+			String componentKindString = "";
+			if ((getTagValue(p, propStereotype, "component")) != null) {
+				componentKindString = getTagValue(p, propStereotype, "component");
 
-		String shownString = getTagValue(p, propStereotype, "shown");
-		if (shownString == null)
-			prop.setShown(true);
-		else {
-			if (shownString.equals("true")) {
+				if (componentKindString == "textField")
+					prop.setComponentKind(ComponentKind.textField);
+				else if (componentKindString == "textArea")
+					prop.setComponentKind(ComponentKind.textArea);
+				else if (componentKindString == "editor")
+					prop.setComponentKind(ComponentKind.editor);
+				else if (componentKindString == "comboBox")
+					prop.setComponentKind(ComponentKind.comboBox);
+				else if (componentKindString == "checkBox")
+					prop.setComponentKind(ComponentKind.checkBox);
+				else if (componentKindString == "dateChooser")
+					prop.setComponentKind(ComponentKind.dateChooser);
+				else
+					prop.setComponentKind(ComponentKind.valueOf(componentKindString));
+			}
+
+			prop.setToolTip(getTagValue(p, propStereotype, "toolTip"));
+			// prop.setMigLayout(getTagValue(p,propStereotype,"migLayout"));
+			// prop.setMigLabel(getTagValue(p,propStereotype,"migLabel"));
+
+			String shownString = getTagValue(p, propStereotype, "shown");
+			if (shownString == null)
 				prop.setShown(true);
-			} else if (shownString.equals("false")) {
-				prop.setShown(false);
+			else {
+				if (shownString.equals("true")) {
+					prop.setShown(true);
+				} else if (shownString.equals("false")) {
+					prop.setShown(false);
+				}
 			}
-		}
 
-		String tableColumnString = getTagValue(p, propStereotype, "tableColumn");
-		if (tableColumnString == null)
-			prop.setTableColumn(true);
-		else {
-			if (tableColumnString.equals("true")) {
+			String tableColumnString = getTagValue(p, propStereotype, "tableColumn");
+			if (tableColumnString == null)
 				prop.setTableColumn(true);
-			} else if (tableColumnString.equals("false")) {
-				prop.setTableColumn(false);
+			else {
+				if (tableColumnString.equals("true")) {
+					prop.setTableColumn(true);
+				} else if (tableColumnString.equals("false")) {
+					prop.setTableColumn(false);
+				}
 			}
-		}
 
-		prop.setColumnName(getTagValue(p, propStereotype, "columnName"));
-		// }
+			prop.setColumnName(getTagValue(p, propStereotype, "columnName"));
+		}
 		return prop;
 	}
 

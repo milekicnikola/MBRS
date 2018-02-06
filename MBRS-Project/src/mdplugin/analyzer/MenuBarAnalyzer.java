@@ -31,13 +31,13 @@ public class MenuBarAnalyzer extends BaseAnalyzer{
 				Element ownedElement = it.next();
 				if (ownedElement instanceof Class) {
 					Class cl = (Class)ownedElement;
-					//if(StereotypesHelper.getAppliedStereotypeByString(cl, "StandardForm") != null) {
+					if(StereotypesHelper.getAppliedStereotypeByString(cl, "StandardForm") != null) {
 						FMClass fmClass = getClassData(cl, packageName, AnalyzerTypeEnum.MENU);
 						fmClass.addImportedPackage("ejb"+ getImportedPackage("", pack, AnalyzerTypeEnum.MENU) + "." + pack.getName());
 						fmClass.addImportedPackage("dao"+ getImportedPackage("", pack, AnalyzerTypeEnum.MENU) + "." + pack.getName());
-						//fmClass.addImportedPackage("standardForm"+ getImportedPackage("", pack, AnalyzerTypeEnum.MENU) + "." + pack.getName());
+						fmClass.addImportedPackage("standardForm"+ getImportedPackage("", pack, AnalyzerTypeEnum.MENU) + "." + pack.getName());
 						FMModel.getInstance().getClasses().add(fmClass);
-					//}
+					}
 				}
 			}
 			for (Iterator<Element> it = pack.getOwnedElement().iterator(); it.hasNext();) {

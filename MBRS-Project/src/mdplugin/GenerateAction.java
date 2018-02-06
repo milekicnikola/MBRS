@@ -50,13 +50,13 @@ class GenerateAction extends MDAction {
 		if (root == null)
 			return;
 
-		ClassAnalyzer modelAnalyzer = new ClassAnalyzer(root, "ejb");
-		ActionAnalyzer actionAnalyzer = new ActionAnalyzer(root, "gui.actions");
-		PanelAnalyzer panelAnalizer = new PanelAnalyzer(root, "standardForm");
+		ClassAnalyzer classAnalyzer = new ClassAnalyzer(root, "ejb");
+		ActionAnalyzer actionAnalyzer = new ActionAnalyzer(root, "gui.actions");		
 		EnumerationAnalyzer enumerationAnalyzer = new EnumerationAnalyzer(root, "enumerations");
 		DaoAnalyzer daoAnalyzer = new DaoAnalyzer(root, "dao");
-		MenuBarAnalyzer menuBarAnalyzer = new MenuBarAnalyzer(root, "gui");
+		MenuBarAnalyzer menuBarAnalyzer = new MenuBarAnalyzer(root, "gui.actions");
 		HibernateAnalyzer hibernateAnalyzer = new HibernateAnalyzer(root, "ejb");
+		PanelAnalyzer panelAnalizer = new PanelAnalyzer(root, "panels");
 
 		try {
 
@@ -64,15 +64,6 @@ class GenerateAction extends MDAction {
 			GeneratorOptions goDao = ProjectOptions.getProjectOptions().getGeneratorOptions().get("DaoGenerator");
 			DaoGenerator daoGenerator = new DaoGenerator(goDao);
 			daoGenerator.generate();
-
-			
-			panelAnalizer.prepareModel();
-			GeneratorOptions goPanel = ProjectOptions.getProjectOptions().getGeneratorOptions()
-			.get("PanelGenerator");
-			PanelGenerator generatePanel = new
-			PanelGenerator(goPanel);
-			generatePanel.generate();
-			
 			
 			GeneratorOptions goHibernateDao = ProjectOptions.getProjectOptions().getGeneratorOptions()
 					.get("HibernateDaoGenerator");
@@ -85,9 +76,9 @@ class GenerateAction extends MDAction {
 			EnumerationGenerator enumerationGenerator = new EnumerationGenerator(goEnumeration);
 			enumerationGenerator.generate();
 
-			modelAnalyzer.prepareModel();
-			GeneratorOptions go = ProjectOptions.getProjectOptions().getGeneratorOptions().get("EJBGenerator");
-			EJBGenerator ejbGenerator = new EJBGenerator(go);
+			classAnalyzer.prepareModel();
+			GeneratorOptions goClass = ProjectOptions.getProjectOptions().getGeneratorOptions().get("ClassGenerator");
+			EJBGenerator ejbGenerator = new EJBGenerator(goClass);
 			ejbGenerator.generate();
 
 			actionAnalyzer.prepareModel();
@@ -106,10 +97,17 @@ class GenerateAction extends MDAction {
 					.get("HibernateConfigGenerator");
 			HibernateGenerator hibernateGenerator = new HibernateGenerator(goHibernate);
 			hibernateGenerator.generate();
+			
+			panelAnalizer.prepareModel();
+			GeneratorOptions goPanel = ProjectOptions.getProjectOptions().getGeneratorOptions()
+			.get("PanelGenerator");
+			PanelGenerator generatePanel = new
+			PanelGenerator(goPanel);
+			generatePanel.generate();
 
 			/** @ToDo: Also call other generators */
 			JOptionPane.showMessageDialog(null, "Code is successfully generated! Generated code is in folder: "
-					+ go.getOutputPath());
+					+ goClass.getOutputPath());
 
 			exportToXml();
 		} catch (AnalyzeException e) {

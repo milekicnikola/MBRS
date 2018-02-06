@@ -195,12 +195,12 @@ public abstract class BaseAnalyzer {
 	
 		// Obrada stored property stereotipa
 
-		if(StereotypesHelper.getAppliedStereotypeByString(p, Resources.STORED_PROPERTY) != null) {
-			Stereotype propStereotype = StereotypesHelper.getAppliedStereotypeByString(p, Resources.STORED_PROPERTY);
+		if(StereotypesHelper.getAppliedStereotypeByString(p, Resources.UI_PROPERTY) != null) {
+			Stereotype propStereotype = StereotypesHelper.getAppliedStereotypeByString(p, Resources.UI_PROPERTY);
 			
 			prop.setUnique(new Boolean(getTagValue(p,propStereotype,"unique")));
 			prop.setNullable(new Boolean(getTagValue(p,propStereotype,"nullable")));
-			prop.setIsEnumerated(new Boolean(getTagValue(p,propStereotype,"isEnumeration")));
+			//prop.setIsEnumerated(new Boolean(getTagValue(p,propStereotype,"isEnumeration")));
 			
 			//svi atributi stereotipa 
 			List<Property> attributes = propStereotype.getOwnedAttribute();

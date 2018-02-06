@@ -34,13 +34,12 @@ public class DaoAnalyzer extends BaseAnalyzer {
 				Element ownedElement = it.next();
 				if (ownedElement instanceof Class) {
 					Class cl = (Class) ownedElement;
-					// if(StereotypesHelper.getAppliedStereotypeByString(cl, "StandardForm") !=
-					// null) {
-					FMClass fmClass = getClassData(cl, packageName, AnalyzerTypeEnum.DAO);
-					fmClass.addImportedPackage(
-							"ejb" + getImportedPackage("", pack, AnalyzerTypeEnum.DAO) + "." + pack.getName());
-					FMModel.getInstance().getClasses().add(fmClass);
-					// }
+					if (StereotypesHelper.getAppliedStereotypeByString(cl, "StandardForm") != null) {
+						FMClass fmClass = getClassData(cl, packageName, AnalyzerTypeEnum.DAO);
+						fmClass.addImportedPackage(
+								"ejb" + getImportedPackage("", pack, AnalyzerTypeEnum.DAO) + "." + pack.getName());
+						FMModel.getInstance().getClasses().add(fmClass);
+					}
 				}
 			}
 

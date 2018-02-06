@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.TextField;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.annotation.Annotation;
@@ -61,7 +62,7 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 	private static final String DAO_SUFFIX = "HibernateDao";
 	private static final String DAO_PACKAGE = "dao";
 	private static final String PANEL_SUFFIX = "Panel";
-	private static final String PANEL_PACKAGE = "standardForm";
+	private static final String PANEL_PACKAGE = "panels";
 
 	@SuppressWarnings("unchecked")
 	public StandardForm(EntityInterface entity, final DaoGeneric dao, JPanel fieldsPanel) {
@@ -69,7 +70,13 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 		this.dao = dao;
 		this.fieldsPanel = fieldsPanel;
 		setTitle(entity.getClass().getSimpleName());
-		setSize(800, 800);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		double width = screenSize.getWidth();
+		double height = screenSize.getHeight();
+		int w = (int) width;
+		int h = (int) height;
+		setSize(w*8/10, h*8/10);
+		setLocationRelativeTo(getParent());
 
 		toolbar = new StandardToolbar(this);
 

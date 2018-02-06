@@ -1,7 +1,5 @@
 package ${class.typePackage};
 
-
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -29,7 +27,7 @@ import javax.swing.JCheckBox;
 <#if property.upper == 1 && property.foreignKey == true >   
 import dao.${property.packagePath}.${property.name?cap_first}HibernateDao;
 import ejb.${property.packagePath}.${property.name?cap_first};
-import standardForm.${property.packagePath}.${property.name?cap_first}Panel;
+import panels.${property.packagePath}.${property.name?cap_first}Panel;
 </#if>  
 </#list>
 import enumerations.*;
@@ -124,22 +122,22 @@ ${class.visibility} class ${class.name}Panel extends JPanel{
 					combo${property.name}.addItem(c);
 				}
 				add(combo${property.name},"gapleft 30");
-				JButton btnZoom${property.name} = new JButton("...");
-				btnZoom${property.name}.addActionListener(new ActionListener() {
+				//JButton btnZoom${property.name} = new JButton("...");
+				//btnZoom${property.name}.addActionListener(new ActionListener() {
 					
-					@Override
-					public void actionPerformed(ActionEvent arg0) {
-				${property.name?cap_first} ${property.name}	= new ${property.name?cap_first}();
-						StandardForm form = new StandardForm((EntityInterface)${property.name}, dao${property.name}, new ${property.name?cap_first}Panel());
-						form.setCmbForZoom(combo${property.name});
-						form.setModal(true);
-						form.setLocationRelativeTo(null);
-						form.setVisible(true);
-					}
-				});
+				//	@Override
+				//	public void actionPerformed(ActionEvent arg0) {
+				//${property.name?cap_first} ${property.name}	= new ${property.name?cap_first}();
+				//		StandardForm form = new StandardForm((EntityInterface)${property.name}, dao${property.name}, new ${property.name?cap_first}Panel());
+				//		form.setCmbForZoom(combo${property.name});
+				//		form.setModal(true);
+				//		form.setLocationRelativeTo(null);
+				//		form.setVisible(true);
+				//	}
+				//});
 				
 				
-				add( btnZoom${property.name},"grow 0,wrap 20");
+				//add( btnZoom${property.name},"grow 0,wrap 20");
 		    </#if> 
 		    
 		    <#if property.upper == 1 && property.isBoolean == true >   

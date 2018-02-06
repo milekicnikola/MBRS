@@ -32,13 +32,13 @@ public class HibernateAnalyzer extends BaseAnalyzer{
 				Element ownedElement = it.next();
 				if (ownedElement instanceof Class) {
 					Class cl = (Class)ownedElement;
-					//if(StereotypesHelper.getAppliedStereotypeByString(cl, "StandardForm") != null) {
+					if(StereotypesHelper.getAppliedStereotypeByString(cl, "StandardForm") != null) {
 						FMClass fmClass = getClassData(cl, packageName, AnalyzerTypeEnum.HIBERNATE);
 						fmClass.addImportedPackage("ejb"+ getImportedPackage("", pack, AnalyzerTypeEnum.HIBERNATE) + "." + pack.getName());
 						fmClass.addImportedPackage("dao"+ getImportedPackage("", pack, AnalyzerTypeEnum.HIBERNATE) + "." + pack.getName());
-						//fmClass.addImportedPackage("standardForm"+ getImportedPackage("", pack, AnalyzerTypeEnum.HIBERNATE) + "." + pack.getName());
+						fmClass.addImportedPackage("standardForm"+ getImportedPackage("", pack, AnalyzerTypeEnum.HIBERNATE) + "." + pack.getName());
 						FMModel.getInstance().getClasses().add(fmClass);
-					//}
+					}
 				}
 			}
 			

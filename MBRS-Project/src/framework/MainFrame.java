@@ -3,7 +3,9 @@ package framework;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -18,7 +20,12 @@ public class MainFrame extends JFrame {
 		setTitle("MBRS Application");
 		Container content = getContentPane();
 		content.setBackground(Color.WHITE);
-		setExtendedState(Frame.MAXIMIZED_BOTH);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		double width = screenSize.getWidth();
+		double height = screenSize.getHeight();
+		int w = (int) width;
+		int h = (int) height;
+		setSize(w*9/10, h*9/10);
 		setLocationRelativeTo(null);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
