@@ -91,6 +91,8 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
+				current_state = 1;
+				dataPanel.changeStatus(1);
 				dataSync();
 			}
 		});
@@ -504,10 +506,10 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 			model.updateRow((EntityAbstract) entity, row);
 			break;
 
-		/*case SEARCH_STATE:
+		case SEARCH_STATE:
 			SearchEngine engine = new SearchEngine(entity, fieldsPanel, model);
 			engine.search();
-			break;*/ //moj komentar
+			break;
 		}
 	}
 	
@@ -641,6 +643,8 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 	public void dataSync() {
 		if(current_state == ADD_STATE)
 			return;
+		if(current_state == SEARCH_STATE)
+			return;
 		
 		int row = table.getSelectedRow();
 		if (row == -1)
@@ -701,7 +705,8 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 		String name = procesRequired(cmp.getName());
 		
 		String columnName = extractColumnName(i);
-		if (name.equals(columnName)) {
+		String check = columnName.toLowerCase();
+		if (check.contains(name)) {
 			Object value = model.getValueAt(row, i);
 			if(value != null)
 				((JTextComponent) cmp).setText(value.toString());
@@ -709,7 +714,7 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 	}
 	
 	/**
-	 * Metoda koja vrsi sinhronizaciju zadatu datumsku komponentu.
+	 * Metoda koja vrsi sinhronizaciju za datu datumsku komponentu.
 	 * Poziva se iz {@link #dataSync()} metode.
 	 * @param row
 	 * @param i
@@ -790,7 +795,7 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 		return retVal;
 	}
 	/** 
-	 * Metoda proverava da li su tekstualna polja i combobox-evi popunjeni ako isprednjih stoji labela koja sadrzi *
+	 * Metoda proverava da li su tekstualna polja i combobox-evi popunjeni ako ispred njih stoji labela koja sadrzi *
 	 * 
 	 * @return true ako je sve uredu, false ako neko tekstualno polje ili combobox nije popunjeno.
 	 * */
@@ -876,7 +881,7 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 						try{
 							Integer.parseInt(fieldNumber.getText());
 						}catch(NumberFormatException e){
-							JOptionPane.showMessageDialog(null, "Text field "+"'"+labels.get(fieldNumber.getName())+"'"+" must be a real number!");
+							JOptionPane.showMessageDialog(null, "Text field "+"'"+labels.get(fieldNumber.getName())+"'"+" must an integer!");
 							return false;
 						}
 					}else if(numberFields.get(fieldNumber.getName()).equals("R")){ // da li je polje Real

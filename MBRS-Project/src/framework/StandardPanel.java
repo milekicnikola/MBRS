@@ -83,14 +83,17 @@ public class StandardPanel extends JPanel {
 		switch (status) {
 		case 0:
 			lblStatus.setText("State: ADD");
+			setVisible(true);
 			break;
 
 		case 1:
 			lblStatus.setText("State: EDIT");
+			setVisible(true);
 			break;
 		
 		case 2:
 			lblStatus.setText("State: SEARCH");
+			setVisible(true);
 			break;
 		}
 	}
