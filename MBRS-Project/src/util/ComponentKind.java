@@ -2,6 +2,6 @@ package util;
 
 public enum ComponentKind {
 
-	textField, textArea, editor, comboBox, checkBox, dateChooser, other
+	textField, textArea, fromOtherTable, comboBox, checkBox, dateChooser
 
 }

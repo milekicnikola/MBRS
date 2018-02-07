@@ -208,7 +208,7 @@ public class PanelAnalyzer extends BaseAnalyzer {
 				else if (componentKindString == "textArea")
 					prop.setComponentKind(ComponentKind.textArea);
 				else if (componentKindString == "editor")
-					prop.setComponentKind(ComponentKind.editor);
+					prop.setComponentKind(ComponentKind.fromOtherTable);
 				else if (componentKindString == "comboBox")
 					prop.setComponentKind(ComponentKind.comboBox);
 				else if (componentKindString == "checkBox")
