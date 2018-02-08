@@ -1,6 +1,6 @@
 package mdplugin.generator.fmmodel;
 
-import util.ComponentKind;
+import gui.ComponentKind;
 
 public class FMProperty extends FMElement {
 	// Property type

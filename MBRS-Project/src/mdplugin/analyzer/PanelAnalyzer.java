@@ -11,11 +11,11 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Type;
 import com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype;
 
+import gui.ComponentKind;
 import mdplugin.generator.fmmodel.FMClass;
 import mdplugin.generator.fmmodel.FMModel;
 import mdplugin.generator.fmmodel.FMProperty;
 import mdplugin.generator.options.Resources;
-import util.ComponentKind;
 
 public class PanelAnalyzer extends BaseAnalyzer {
 

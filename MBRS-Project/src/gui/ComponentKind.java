@@ -1,4 +1,4 @@
-package util;
+package gui;
 
 public enum ComponentKind {
 

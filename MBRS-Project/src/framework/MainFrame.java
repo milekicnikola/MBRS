@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
@@ -12,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import util.MenuBar;
+import gui.MenuBar;
 
 public class MainFrame extends JFrame {
 
@@ -30,7 +29,7 @@ public class MainFrame extends JFrame {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		ImageIcon image = new ImageIcon("images/java.jpeg");
+		ImageIcon image = new ImageIcon("images/java.png");
 		JLabel label = new JLabel("", image, JLabel.CENTER);
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.add(label, BorderLayout.CENTER);

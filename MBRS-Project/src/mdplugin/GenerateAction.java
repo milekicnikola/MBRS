@@ -2,13 +2,17 @@ package mdplugin;
 
 import java.awt.event.ActionEvent;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+
+import org.apache.commons.io.FileUtils;
 
 import com.nomagic.magicdraw.actions.MDAction;
 import com.nomagic.magicdraw.core.Application;
@@ -51,7 +55,7 @@ class GenerateAction extends MDAction {
 			return;
 
 		ClassAnalyzer classAnalyzer = new ClassAnalyzer(root, "ejb");
-		ActionAnalyzer actionAnalyzer = new ActionAnalyzer(root, "gui.actions");		
+		ActionAnalyzer actionAnalyzer = new ActionAnalyzer(root, "gui.actions");
 		EnumerationAnalyzer enumerationAnalyzer = new EnumerationAnalyzer(root, "enumerations");
 		DaoAnalyzer daoAnalyzer = new DaoAnalyzer(root, "dao");
 		MenuBarAnalyzer menuBarAnalyzer = new MenuBarAnalyzer(root, "gui.actions");
@@ -59,12 +63,11 @@ class GenerateAction extends MDAction {
 		PanelAnalyzer panelAnalizer = new PanelAnalyzer(root, "panels");
 
 		try {
-
 			daoAnalyzer.prepareModel();
 			GeneratorOptions goDao = ProjectOptions.getProjectOptions().getGeneratorOptions().get("DaoGenerator");
 			DaoGenerator daoGenerator = new DaoGenerator(goDao);
 			daoGenerator.generate();
-			
+
 			GeneratorOptions goHibernateDao = ProjectOptions.getProjectOptions().getGeneratorOptions()
 					.get("HibernateDaoGenerator");
 			DaoGenerator hibernateDaoGenerator = new DaoGenerator(goHibernateDao);
@@ -97,22 +100,42 @@ class GenerateAction extends MDAction {
 					.get("HibernateConfigGenerator");
 			HibernateGenerator hibernateGenerator = new HibernateGenerator(goHibernate);
 			hibernateGenerator.generate();
-			
+
 			panelAnalizer.prepareModel();
-			GeneratorOptions goPanel = ProjectOptions.getProjectOptions().getGeneratorOptions()
-			.get("PanelGenerator");
-			PanelGenerator generatePanel = new
-			PanelGenerator(goPanel);
+			GeneratorOptions goPanel = ProjectOptions.getProjectOptions().getGeneratorOptions().get("PanelGenerator");
+			PanelGenerator generatePanel = new PanelGenerator(goPanel);
 			generatePanel.generate();
 
 			/** @ToDo: Also call other generators */
-			JOptionPane.showMessageDialog(null, "Code is successfully generated! Generated code is in folder: "
-					+ goClass.getOutputPath());
+			JOptionPane.showMessageDialog(null,
+					"Code is successfully generated! Generated code is in folder: " + goClass.getOutputPath());
 
 			exportToXml();
 		} catch (AnalyzeException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
+		
+/*		try {
+
+		String srcPath = "D:\\Master\\MBRS\\MBRSGIT\\MBRS-Project\\images";
+
+		String currentDir = System.getProperty("user.dir");
+		String destPath = currentDir + "/GeneratedApp";
+
+		JOptionPane.showMessageDialog(null, srcPath + "   " + destPath);
+
+		File srcDir = new File(srcPath);
+		File destDir = new File(destPath);
+
+		
+		FileUtils.copyDirectory(srcDir, destDir);
+		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
+
 	}
 
 	private void exportToXml() {

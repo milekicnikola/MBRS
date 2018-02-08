@@ -75,7 +75,7 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 		double height = screenSize.getHeight();
 		int w = (int) width;
 		int h = (int) height;
-		setSize(w*8/10, h*8/10);
+		setSize(w * 8 / 10, h * 8 / 10);
 		setLocationRelativeTo(getParent());
 
 		toolbar = new StandardToolbar(this);
@@ -114,9 +114,9 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 		add(dataPanel, BorderLayout.SOUTH);
 
 	}
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public StandardForm(EntityInterface entity, final DaoGeneric dao,
-			JPanel fieldsPanel, String reportPath) {
+	public StandardForm(EntityInterface entity, final DaoGeneric dao, JPanel fieldsPanel, String reportPath) {
 		this.entity = entity;
 		this.dao = dao;
 		this.fieldsPanel = fieldsPanel;
@@ -124,12 +124,12 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 		setSize(800, 800);
 
 		toolbar = new StandardToolbar(this);
-		
-		/*if (reportPath != null) {
-			JButton btnReport = new JButton("Report");
-			btnReport.addActionListener(new ReportAction(reportPath));	
-			toolbar.add(btnReport);
-		}*/
+
+		/*
+		 * if (reportPath != null) { JButton btnReport = new JButton("Report");
+		 * btnReport.addActionListener(new ReportAction(reportPath));
+		 * toolbar.add(btnReport); }
+		 */
 
 		String[] columns = getFieldLabels(fieldsPanel);
 
@@ -138,21 +138,18 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 
 		table = new JTable();
 		table.setModel(model);
-		table.getSelectionModel().addListSelectionListener(
-				new ListSelectionListener() {
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
-					@Override
-					public void valueChanged(ListSelectionEvent arg0) {
-						dataSync();
-					}
-				});
+			@Override
+			public void valueChanged(ListSelectionEvent arg0) {
+				dataSync();
+			}
+		});
 
 		int index = table.getColumnModel().getColumnIndex("ID");
-		table.getColumnModel().removeColumn(
-				table.getColumnModel().getColumn(index));
+		table.getColumnModel().removeColumn(table.getColumnModel().getColumn(index));
 
-		JScrollPane scroll = new JScrollPane(table,
-				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+		JScrollPane scroll = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scroll.setPreferredSize(new Dimension(500, 500));
 
@@ -165,9 +162,10 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 		add(dataPanel, BorderLayout.SOUTH);
 
 	}
+
 	/*
-	 * Metoda koja sa panela za konkretnu perzistentnu klasu kupi labele i
-	 * dodaje u table model
+	 * Metoda koja sa panela za konkretnu perzistentnu klasu kupi labele i dodaje u
+	 * table model
 	 */
 	public String[] getFieldLabels(JPanel panel) {
 		ArrayList<String> labels = new ArrayList<String>();
@@ -211,6 +209,8 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 			return;
 
 		model.deleteRow(row);
+		dataPanel.clearDataPanel(dataPanel);
+
 	}
 
 	@Override
@@ -249,7 +249,7 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 			for (final Field field : nextCandidates) {
 				JMenuItem item = new JMenuItem(field.getName());
 				popUp.add(item);
-				
+
 				preprareNextForm(entityClassName, fields, field, item);
 			}
 
@@ -260,21 +260,21 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 	}
 
 	private void preprareNextForm(String entityClassName, Field[] fields, final Field field, JMenuItem item) {
-		
+
 		ParameterizedType typeInSet = (ParameterizedType) field.getGenericType();
-        Class<?> classInSet = (Class<?>) typeInSet.getActualTypeArguments()[0];
-		
-        String fieldName = fieldNameWithUpperCase(field.getName());
-		
+		Class<?> classInSet = (Class<?>) typeInSet.getActualTypeArguments()[0];
+
+		String fieldName = fieldNameWithUpperCase(field.getName());
+
 		String classPackage = classInSet.getPackage().getName();
 		String panelPackage = getPackageName(classPackage, PANEL_PACKAGE);
-		String daoPackage =getPackageName(classPackage, DAO_PACKAGE);
+		String daoPackage = getPackageName(classPackage, DAO_PACKAGE);
 
 		final EntityInterface nextEntity = (EntityInterface) getClassInstance(classPackage, fieldName, "");
 		final DaoGeneric nextDao = (DaoGeneric) getClassInstance(daoPackage, fieldName, DAO_SUFFIX);
 		final JPanel panel = (JPanel) getClassInstance(panelPackage, fieldName, PANEL_SUFFIX);
 
-		//deo u kom selektujem parent entity na child entity-ju.
+		// deo u kom selektujem parent entity na child entity-ju.
 		for (Component c : panel.getComponents()) {
 			if (c instanceof JComboBox) {
 				if (c.getName().equals(entityClassName.toLowerCase())) {
@@ -283,25 +283,25 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 						Object entityAt = cmbModel.getElementAt(i);
 						if (entity.toString().equals(entityAt.toString())) {
 							cmbModel.setSelectedItem(entityAt);
-							c.setEnabled(false);
+							c.setEnabled(true);
 						}
 					}
 				}
 			}
 
 		}
-		
-		if(item != null){
+
+		if (item != null) {
 			setItemListener(item, nextEntity, nextDao, panel);
 		} else {
 			instantiationOfNextForm(nextEntity, nextDao, panel);
 		}
 	}
 
-
 	/**
-	 * Metoda koja vraca ime atributa klase sa velikim prvim slovom.
-	 * Primer: enterprise -> Enterprise.
+	 * Metoda koja vraca ime atributa klase sa velikim prvim slovom. Primer:
+	 * enterprise -> Enterprise.
+	 * 
 	 * @param fieldName
 	 * @return String
 	 */
@@ -316,9 +316,14 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 	/**
 	 * Metoda koja vraca instancu odredjene klase.
 	 * 
-	 * @param packageName - ime paketa u kom se nalazi klasa ciji se objekat zeli instancirati.
-	 * @param fieldName - naziv atributa po cijem nazivu se trazi odgovarajuca klasa.
-	 * @param suffix - dodatak na ime klase, npr za panel suffix je 'Panel', za dao je 'HibernateDao'.
+	 * @param packageName
+	 *            - ime paketa u kom se nalazi klasa ciji se objekat zeli
+	 *            instancirati.
+	 * @param fieldName
+	 *            - naziv atributa po cijem nazivu se trazi odgovarajuca klasa.
+	 * @param suffix
+	 *            - dodatak na ime klase, npr za panel suffix je 'Panel', za dao je
+	 *            'HibernateDao'.
 	 * @return
 	 */
 	private Object getClassInstance(String packageName, String fieldName, String suffix) {
@@ -334,43 +339,50 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 	}
 
 	/**
-	 * Metoda koja vraca naziv paketa na osnovu zadatog parametra.
-	 * S obzirom da se generisani kod paketira uvek po istom sablonu,
-	 * dovoljno je da se uradi replace stringa 'ejb' sa odredjenim parametrom,
-	 * da bi se dobio zeljeni paket.
+	 * Metoda koja vraca naziv paketa na osnovu zadatog parametra. S obzirom da se
+	 * generisani kod paketira uvek po istom sablonu, dovoljno je da se uradi
+	 * replace stringa 'ejb' sa odredjenim parametrom, da bi se dobio zeljeni paket.
+	 * 
 	 * @param parameter
 	 * @return
 	 */
 	private String getPackageName(String className, String parameter) {
 		return className.replace("ejb", parameter);
 	}
-	
+
 	/**
-	 * Klasa koja instancira genericku standardnu formu prilikom koriscenja next mehanizma unutar metoda
+	 * Klasa koja instancira genericku standardnu formu prilikom koriscenja next
+	 * mehanizma unutar metoda
 	 * {@link #preprareNextForm(String, Field[], Field, JMenuItem)}, te
 	 * {@link #setItemListener(JMenuItem, IEntity, GenericDao, JPanel)}.
 	 * 
-	 * @param nextEntity - child entitet.
-	 * @param nextDao - dao bean od child entiteta.
-	 * @param panel - panel od child entiteta.
+	 * @param nextEntity
+	 *            - child entitet.
+	 * @param nextDao
+	 *            - dao bean od child entiteta.
+	 * @param panel
+	 *            - panel od child entiteta.
 	 */
-	private void instantiationOfNextForm(final EntityInterface nextEntity, final DaoGeneric nextDao, final JPanel panel) {
+	private void instantiationOfNextForm(final EntityInterface nextEntity, final DaoGeneric nextDao,
+			final JPanel panel) {
 		StandardForm form = new StandardForm(nextEntity, nextDao, panel);
 		form.setModal(true);
 		form.setLocationRelativeTo(null);
 		form.setVisible(true);
 	}
-	
+
 	/**
 	 * Metoda koja prosledjenom JMenuItem-u set-uje listener, koji instancira
-	 * genericku standardnu formu prilikom koriscenja next mehanizma pomocu metode 
+	 * genericku standardnu formu prilikom koriscenja next mehanizma pomocu metode
 	 * {@link #instantiationOfNextForm(IEntity, GenericDao, JPanel)}.
+	 * 
 	 * @param item
 	 * @param nextEntity
 	 * @param nextDao
 	 * @param panel
 	 */
-	private void setItemListener(JMenuItem item, final EntityInterface nextEntity, final DaoGeneric nextDao, final JPanel panel) {
+	private void setItemListener(JMenuItem item, final EntityInterface nextEntity, final DaoGeneric nextDao,
+			final JPanel panel) {
 		item.addActionListener(new ActionListener() {
 
 			@Override
@@ -459,7 +471,7 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 		EntityInterface entity = dao.findById(id);
 
 		// da se ne bi morala preklapati equals(),
-	
+
 		ComboBoxModel cmbModel = cmbForZoom.getModel();
 		for (int i = 0; i < cmbModel.getSize(); i++) {
 			Object entityAt = cmbModel.getElementAt(i);
@@ -483,7 +495,7 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 	public void commit() {
 		switch (current_state) {
 		case ADD_STATE:
-			if(!validation()){
+			if (!validation()) {
 				break;
 			}
 			setEntityValuesFromFields();
@@ -499,7 +511,7 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 
 			Integer id = (Integer) model.getValueAt(row, 0);
 			setEntityId(entity, id);
-			if(!validation()){
+			if (!validation()) {
 				break;
 			}
 			setEntityValuesFromFields();
@@ -512,15 +524,14 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 			break;
 		}
 	}
-	
-	private EntityInterface makeNewInstance(EntityInterface currentEntity){
+
+	private EntityInterface makeNewInstance(EntityInterface currentEntity) {
 		try {
 			return currentEntity.getClass().newInstance();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Error",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		}
-		return null; 
+		return null;
 	}
 
 	@Override
@@ -546,15 +557,15 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 				String methodName = nameBuilder(comboBox);
 				Object object = comboBox.getSelectedItem();
 				invokeMethodWithParameter(methodName, object);
-			} else if(cmp instanceof JScrollPane){
-				JTextArea txtArea = (JTextArea)((JScrollPane)cmp).getViewport().getView();
+			} else if (cmp instanceof JScrollPane) {
+				JTextArea txtArea = (JTextArea) ((JScrollPane) cmp).getViewport().getView();
 				String methodName = nameBuilder(txtArea);
 				invokeMethodWithParameter(methodName, txtArea.getText());
-			} else if(cmp instanceof JDatePickerImpl){
-				Date date = (Date) ((JDatePickerImpl)cmp).getModel().getValue();
+			} else if (cmp instanceof JDatePickerImpl) {
+				Date date = (Date) ((JDatePickerImpl) cmp).getModel().getValue();
 				String methodName = nameBuilder(cmp);
 				invokeMethodWithParameter(methodName, date);
-			} else if(cmp instanceof JCheckBox){
+			} else if (cmp instanceof JCheckBox) {
 				String methodName = nameBuilder(cmp);
 				invokeMethodWithParameter(methodName, ((JCheckBox) cmp).isSelected());
 			}
@@ -563,8 +574,8 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 	}
 
 	/**
-	 * Metoda koja vrsi pozivanje set metode entiteta, pri cemu joj se prosledi
-	 * i parametar koji se set-uje.
+	 * Metoda koja vrsi pozivanje set metode entiteta, pri cemu joj se prosledi i
+	 * parametar koji se set-uje.
 	 * 
 	 * @param methodName
 	 *            - naziv set metode
@@ -576,30 +587,28 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 			if (methodName.equals(m.getName())) {
 				try {
 					Class[] parameterTypes = m.getParameterTypes();
-					if(parameterTypes[0].equals(Integer.class)){
-						Integer value = Integer.parseInt((String)parameter[0]);
+					if (parameterTypes[0].equals(Integer.class)) {
+						Integer value = Integer.parseInt((String) parameter[0]);
 						return m.invoke(entity, value);
 					}
-					
-					if(parameterTypes[0].equals(Float.TYPE)){
-						Float value = Float.parseFloat((String)parameter[0]);
+
+					if (parameterTypes[0].equals(Float.TYPE)) {
+						Float value = Float.parseFloat((String) parameter[0]);
 						return m.invoke(entity, value);
 					}
-					
+
 					return m.invoke(entity, parameter);
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e.getMessage(), "Error",
-							JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		}
 		return null;
 	}
-	
 
 	/**
-	 * Metoda koja na osnovu naziva komponente kreira naziv set metode za
-	 * atribut sa istim nazivom.
+	 * Metoda koja na osnovu naziva komponente kreira naziv set metode za atribut sa
+	 * istim nazivom.
 	 * 
 	 * @param cmp
 	 *            - Komponenta za koju se kreira naziv set metode
@@ -620,8 +629,8 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 	}
 
 	/**
-	 * Pozivanje setId() metode za entitet koji se perzistira. Koristi se
-	 * prilikom izmene ili brisanja entiteta.
+	 * Pozivanje setId() metode za entitet koji se perzistira. Koristi se prilikom
+	 * izmene ili brisanja entiteta.
 	 * 
 	 * @param entity
 	 *            - entitet koji se zeli perzistirati
@@ -633,19 +642,18 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 			Method method = entity.getClass().getMethod("setId", Integer.class);
 			method.invoke(entity, id);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Error",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 	}
 
 	@Override
 	public void dataSync() {
-		if(current_state == ADD_STATE)
+		if (current_state == ADD_STATE)
 			return;
-		if(current_state == SEARCH_STATE)
+		if (current_state == SEARCH_STATE)
 			return;
-		
+
 		int row = table.getSelectedRow();
 		if (row == -1)
 			return;
@@ -662,27 +670,29 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 							cmbModel.setSelectedItem(object);
 						}
 					}
-				} else if(cmp instanceof JScrollPane){
-					JTextArea txtArea = (JTextArea)((JScrollPane)cmp).getViewport().getView();
+				} else if (cmp instanceof JScrollPane) {
+					JTextArea txtArea = (JTextArea) ((JScrollPane) cmp).getViewport().getView();
 					processTextComponent(row, i, txtArea);
-				}else if (cmp instanceof JDatePickerImpl){
+				} else if (cmp instanceof JDatePickerImpl) {
 					processDateComponent(row, i, (JDatePickerImpl) cmp);
-				}else if(cmp instanceof JCheckBox){
+				} else if (cmp instanceof JCheckBox) {
 					String name = procesRequired(cmp.getName());
 					String columnName = extractColumnName(i);
-					if(name.equals(columnName)){
+					String checkColumn = columnName.toLowerCase();
+					String checkName = name.toLowerCase();
+					if (checkColumn.contains(checkName)) {
 						String value = (String) model.getValueAt(row, i);
 						((JCheckBox) cmp).setSelected(value.equals("true"));
 					}
 				}
-
 			}
 		}
 	}
-	
+
 	/**
-	 * Metoda proverava da li se unutar imena komponente nalazi znak '*'.
-	 * Ukoliko se nalazi, znak se izbacuje.
+	 * Metoda proverava da li se unutar imena komponente nalazi znak '*'. Ukoliko se
+	 * nalazi, znak se izbacuje.
+	 * 
 	 * @param name
 	 * @return
 	 */
@@ -692,37 +702,39 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 		}
 		return name;
 	}
-	
-	
+
 	/**
-	 * Metoda koja vrsi sinhronizaciju zadatu tekstualnu komponentu.
-	 * Poziva se iz {@link #dataSync()} metode.
+	 * Metoda koja vrsi sinhronizaciju za datu tekstualnu komponentu. Poziva se iz
+	 * {@link #dataSync()} metode.
+	 * 
 	 * @param row
 	 * @param i
 	 * @param cmp
 	 */
 	private void processTextComponent(int row, int i, JTextComponent cmp) {
 		String name = procesRequired(cmp.getName());
-		
+
 		String columnName = extractColumnName(i);
-		String check = columnName.toLowerCase();
-		if (check.contains(name)) {
+		String checkColumn = columnName.toLowerCase();
+		String checkName = name.toLowerCase();
+		if (checkColumn.contains(checkName)) {
 			Object value = model.getValueAt(row, i);
-			if(value != null)
+			if (value != null)
 				((JTextComponent) cmp).setText(value.toString());
 		}
 	}
-	
+
 	/**
-	 * Metoda koja vrsi sinhronizaciju za datu datumsku komponentu.
-	 * Poziva se iz {@link #dataSync()} metode.
+	 * Metoda koja vrsi sinhronizaciju za datu datumsku komponentu. Poziva se iz
+	 * {@link #dataSync()} metode.
+	 * 
 	 * @param row
 	 * @param i
 	 * @param cmp
 	 */
-	private void processDateComponent(int row, int i, JDatePickerImpl cmp){
+	private void processDateComponent(int row, int i, JDatePickerImpl cmp) {
 		String name = procesRequired(cmp.getName());
-		
+
 		String columnName = extractColumnName(i);
 		if (name.equals(columnName)) {
 			String dateString = String.valueOf(model.getValueAt(row, i));
@@ -730,44 +742,44 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 			Date date;
 			try {
 				date = dateFormat.parse(dateString);
-				((JDatePickerImpl)cmp).getModel().setDate(date.getYear()+1900, date.getMonth(), date.getDate());
-				((JDatePickerImpl)cmp).getModel().setSelected(true);
+				((JDatePickerImpl) cmp).getModel().setDate(date.getYear() + 1900, date.getMonth(), date.getDate());
+				((JDatePickerImpl) cmp).getModel().setSelected(true);
 			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, e.getMessage(), "Error",
-						JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 		}
 	}
 
 	/**
-	 * Metoda na osnovu imena kolone unutar tabele kreira
-	 * naziv komponente koju je potrebno naci na panelu za unos.
+	 * Metoda na osnovu imena kolone unutar tabele kreira naziv komponente koju je
+	 * potrebno naci na panelu za unos.
+	 * 
 	 * @param i
 	 * @return
 	 */
 	private String extractColumnName(int i) {
 		String columnName = model.getColumnName(i);
-		if(columnName.contains("*")){
+		if (columnName.contains("*")) {
 			columnName = columnName.replace("*", "").trim();
 		}
-		if(columnName.contains(" ")){
+		if (columnName.contains(" ")) {
 			StringBuffer buffer = new StringBuffer();
 			StringTokenizer tokenizer = new StringTokenizer(columnName);
 			int firstToken = 0;
-			while(tokenizer.hasMoreElements()){
+			while (tokenizer.hasMoreElements()) {
 				String t = (String) tokenizer.nextElement();
-				if(firstToken == 0){
+				if (firstToken == 0) {
 					t = t.toLowerCase();
 					firstToken++;
-				}else{
-					//svako sledeca rec pocinje velikim slovom, camel note.
-					t = t.substring(0,1).toUpperCase() + t.substring(1, t.length());
+				} else {
+					// svako sledeca rec pocinje velikim slovom, camel note.
+					t = t.substring(0, 1).toUpperCase() + t.substring(1, t.length());
 				}
 				buffer.append(t);
 			}
 			columnName = buffer.toString();
-		}else{
+		} else {
 			columnName = columnName.toLowerCase();
 		}
 		return columnName;
@@ -776,80 +788,91 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 	public void setCmbForZoom(JComboBox cmbForZoom) {
 		this.cmbForZoom = cmbForZoom;
 	}
-	
+
 	/**
 	 * Metoda vrsi validaciju nad formom
 	 * 
 	 * @return true ako je sve uredu, u suprotnom false
-	 * */
-	private boolean validation(){
+	 */
+	private boolean validation() {
 		boolean retVal = true;
 		retVal = requiredValidation();
-		if(!retVal){
+		if (!retVal) {
 			return false;
 		}
 		retVal = numberValidation();
-		if(!retVal){
+		if (!retVal) {
 			return false;
 		}
 		return retVal;
 	}
-	/** 
-	 * Metoda proverava da li su tekstualna polja i combobox-evi popunjeni ako ispred njih stoji labela koja sadrzi *
+
+	/**
+	 * Metoda proverava da li su tekstualna polja i combobox-evi popunjeni ako
+	 * ispred njih stoji labela koja sadrzi *
 	 * 
-	 * @return true ako je sve uredu, false ako neko tekstualno polje ili combobox nije popunjeno.
-	 * */
-	private boolean requiredValidation(){
-		Map<String,String> labels = new HashMap<String,String>();
+	 * @return true ako je sve uredu, false ako neko tekstualno polje ili combobox
+	 *         nije popunjeno.
+	 */
+	private boolean requiredValidation() {
+		Map<String, String> labels = new HashMap<String, String>();
 		for (Component cmp : fieldsPanel.getComponents()) {
 			if (cmp instanceof JLabel) {
 				JLabel label = (JLabel) cmp;
 				String text = label.getText();
 				if (!text.isEmpty()) {
-					if(text.endsWith("*")){
-						labels.put(label.getName(),text.substring(0,text.length()-1));
+					if (text.endsWith("*")) {
+						labels.put(label.getName(), text.substring(0, text.length() - 1));
 					}
 				}
 			}
 		}
 		for (Component cmp : fieldsPanel.getComponents()) {
 			if (cmp instanceof JTextField) {
-					if(labels.containsKey(cmp.getName()) && (((JTextField) cmp).getText().equals("")  || ((JTextField) cmp).getText()== null)){
-						JOptionPane.showMessageDialog(null, "Text field "+"'"+labels.get(cmp.getName())+"'"+" cannot be empty!");
-						return false;
-					}
-			}else if (cmp instanceof JComboBox) {
-					@SuppressWarnings("rawtypes")
-					JComboBox comboBox = (JComboBox) cmp;
-					Object object = comboBox.getSelectedItem();
-					if(labels.containsKey(cmp.getName()) && (((JComboBox) cmp).getSelectedItem() == null)){
-						JOptionPane.showMessageDialog(null, "Combobox "+"'"+labels.get(cmp.getName())+"'"+" cannot be empty!");
-						return false;
-					}
-			}else if(cmp instanceof JScrollPane) {
-				JTextArea tempArea = (JTextArea) ((JScrollPane)cmp).getViewport().getView();
-				if(labels.containsKey(tempArea.getName()) && (tempArea.getText().equals("")  || tempArea.getText()==null)){
-					JOptionPane.showMessageDialog(null, "Text field "+"'"+labels.get(tempArea.getName())+"'"+" cannot be empty!");
+				if (labels.containsKey(cmp.getName())
+						&& (((JTextField) cmp).getText().equals("") || ((JTextField) cmp).getText() == null)) {
+					JOptionPane.showMessageDialog(null,
+							"Text field " + "'" + labels.get(cmp.getName()) + "'" + " cannot be empty!");
 					return false;
 				}
-			}else if(cmp instanceof JDatePickerImpl){
-				Date selectedDate = (Date) ((JDatePickerImpl)cmp).getModel().getValue();
-				if(selectedDate == null){
-					JOptionPane.showMessageDialog(null, "Date field "+"'"+labels.get(((JDatePickerImpl)cmp).getName())+"'"+" cannot be empty!");
+			} else if (cmp instanceof JComboBox) {
+				@SuppressWarnings("rawtypes")
+				JComboBox comboBox = (JComboBox) cmp;
+				Object object = comboBox.getSelectedItem();
+				if (labels.containsKey(cmp.getName()) && (((JComboBox) cmp).getSelectedItem() == null)) {
+					JOptionPane.showMessageDialog(null,
+							"Combobox " + "'" + labels.get(cmp.getName()) + "'" + " cannot be empty!");
+					return false;
+				}
+			} else if (cmp instanceof JScrollPane) {
+				JTextArea tempArea = (JTextArea) ((JScrollPane) cmp).getViewport().getView();
+				if (labels.containsKey(tempArea.getName())
+						&& (tempArea.getText().equals("") || tempArea.getText() == null)) {
+					JOptionPane.showMessageDialog(null,
+							"Text field " + "'" + labels.get(tempArea.getName()) + "'" + " cannot be empty!");
+					return false;
+				}
+			} else if (cmp instanceof JDatePickerImpl) {
+				Date selectedDate = (Date) ((JDatePickerImpl) cmp).getModel().getValue();
+				if (selectedDate == null) {
+					JOptionPane.showMessageDialog(null, "Date field " + "'"
+							+ labels.get(((JDatePickerImpl) cmp).getName()) + "'" + " cannot be empty!");
 					return false;
 				}
 			}
 		}
 		return true;
 	}
+
 	/**
-	 * Metoda provera da li se u tekstualnim poljima koja su predvidjena za unos celih ili realnih brojeva
-	 * nalazi takav sadrzaj
+	 * Metoda provera da li se u tekstualnim poljima koja su predvidjena za unos
+	 * celih ili realnih brojeva nalazi takav sadrzaj
 	 * 
-	 * @return true ako je sve uredu, false ako u tekstualno polje nije upisan trazeni broj.
-	 * */
-	private boolean numberValidation(){
-		Map<String,String> numberFields = new HashMap<String,String>();
+	 * @return true ako je sve uredu, false ako u tekstualno polje nije upisan
+	 *         trazeni broj.
+	 */
+	private boolean numberValidation() {
+		Map<String, String> numberFields = new HashMap<String, String>();
 		for (Component cmp : fieldsPanel.getComponents()) {
 			if (cmp instanceof TextField) {
 				TextField fieldNumber = (TextField) cmp;
@@ -857,17 +880,17 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 				numberFields.put(fieldNumber.getName(), text);
 			}
 		}
-		Map<String,String> labels = new HashMap<String,String>();
+		Map<String, String> labels = new HashMap<String, String>();
 		for (Component cmp : fieldsPanel.getComponents()) {
 			if (cmp instanceof JLabel) {
 				JLabel label = (JLabel) cmp;
-				if(numberFields.containsKey(label.getName())){
+				if (numberFields.containsKey(label.getName())) {
 					String text = label.getText();
 					if (!text.isEmpty()) {
-						if(text.endsWith("*")){
-							labels.put(label.getName(),text.substring(0,text.length()-1));
-						}else{
-							labels.put(label.getName(),text);
+						if (text.endsWith("*")) {
+							labels.put(label.getName(), text.substring(0, text.length() - 1));
+						} else {
+							labels.put(label.getName(), text);
 						}
 					}
 				}
@@ -876,19 +899,21 @@ public class StandardForm extends JDialog implements StandardFormInterface {
 		for (Component cmp : fieldsPanel.getComponents()) {
 			if (cmp instanceof JTextField) {
 				JTextField fieldNumber = (JTextField) cmp;
-				if(numberFields.containsKey(fieldNumber.getName())){
-					if(numberFields.get(fieldNumber.getName()).equals("I")){ // da li je polje Integer
-						try{
+				if (numberFields.containsKey(fieldNumber.getName())) {
+					if (numberFields.get(fieldNumber.getName()).equals("I")) { // da li je polje Integer
+						try {
 							Integer.parseInt(fieldNumber.getText());
-						}catch(NumberFormatException e){
-							JOptionPane.showMessageDialog(null, "Text field "+"'"+labels.get(fieldNumber.getName())+"'"+" must an integer!");
+						} catch (NumberFormatException e) {
+							JOptionPane.showMessageDialog(null, "Text field " + "'" + labels.get(fieldNumber.getName())
+									+ "'" + " must be an integer!");
 							return false;
 						}
-					}else if(numberFields.get(fieldNumber.getName()).equals("R")){ // da li je polje Real
-						try{
+					} else if (numberFields.get(fieldNumber.getName()).equals("R")) { // da li je polje Real
+						try {
 							Double.parseDouble(fieldNumber.getText());
-						}catch(NumberFormatException e){
-							JOptionPane.showMessageDialog(null, "Text field "+"'"+labels.get(fieldNumber.getName())+"'"+" must be a real number!");
+						} catch (NumberFormatException e) {
+							JOptionPane.showMessageDialog(null, "Text field " + "'" + labels.get(fieldNumber.getName())
+									+ "'" + " must be a real number!");
 							return false;
 						}
 					}
