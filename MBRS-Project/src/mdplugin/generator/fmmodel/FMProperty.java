@@ -17,11 +17,7 @@ public class FMProperty extends FMElement {
 
 	private Boolean foreignKey = false;
 	private Boolean isBoolean = false;
-	//private Boolean isEnumeration = false;
-	//private Integer textWidth;
-	//private Boolean isTextField = true;
 	private Boolean isDate = false;
-	//private Boolean isTextArea = false;
 	private String packagePath;
 	private Boolean isInteger = false;
 	private Boolean isReal = false;
@@ -34,24 +30,18 @@ public class FMProperty extends FMElement {
 	 *        languange metaclass or stereotype
 	 */
 
-	// Added
 	protected Integer length;
 	protected Integer precision;
 	protected ComponentKind component;
 	protected String toolTip;
-	// private String migLayout;
-	// private String migLabel;
 	protected Boolean shown = true;
 	protected Boolean tableColumn = true;
 	protected Boolean unique = false;
 	protected Boolean nullable = true;
 	protected Boolean required = false;
 	protected Boolean isEnumerated = false;
-
 	protected String columnName;
 	protected String mappedBy;
-
-	//
 
 	public FMProperty(String name, String type, String visibility, int lower, int upper) {
 		super(name);
@@ -110,13 +100,6 @@ public class FMProperty extends FMElement {
 		this.precision = precision;
 	}
 
-	/*
-	 * public ComponentKind getComponentKind() { return componentKind; }
-	 * 
-	 * public void setComponentKind(ComponentKind componentKind) {
-	 * this.componentKind = componentKind; }
-	 */
-
 	public String getToolTip() {
 		return toolTip;
 	}
@@ -125,15 +108,6 @@ public class FMProperty extends FMElement {
 		this.toolTip = toolTip;
 	}
 
-	/*
-	 * public String getMigLayout() { return migLayout; }
-	 * 
-	 * public void setMigLayout(String migLayout) { this.migLayout = migLayout; }
-	 * 
-	 * public String getMigLabel() { return migLabel; }
-	 * 
-	 * public void setMigLabel(String migLabel) { this.migLabel = migLabel; }
-	 */
 	public Boolean getShown() {
 		return shown;
 	}
@@ -230,14 +204,6 @@ public class FMProperty extends FMElement {
 		this.foreignKey = foreignKey;
 	}
 
-/*	public Integer getTextWidth() {
-		return textWidth;
-	}
-
-	public void setTextWidth(Integer textWidth) {
-		this.textWidth = textWidth;
-	}*/
-
 	public String getPackagePath() {
 		return packagePath;
 	}
@@ -270,22 +236,6 @@ public class FMProperty extends FMElement {
 		this.isBoolean = isBoolean;
 	}
 
-	/*public Boolean getIsEnumeration() {
-		return isEnumeration;
-	}
-
-	public void setIsEnumeration(Boolean isEnumeration) {
-		this.isEnumeration = isEnumeration;
-	}*/
-
-	/*public Boolean getIsTextField() {
-		return isTextField;
-	}
-
-	public void setIsTextField(Boolean isTextField) {
-		this.isTextField = isTextField;
-	}*/
-
 	public Boolean getIsDate() {
 		return isDate;
 	}
@@ -293,14 +243,6 @@ public class FMProperty extends FMElement {
 	public void setIsDate(Boolean isDate) {
 		this.isDate = isDate;
 	}
-
-	/*public Boolean getIsTextArea() {
-		return isTextArea;
-	}
-
-	public void setIsTextArea(Boolean isTextArea) {
-		this.isTextArea = isTextArea;
-	}*/
 
 	public Boolean getIsInteger() {
 		return isInteger;

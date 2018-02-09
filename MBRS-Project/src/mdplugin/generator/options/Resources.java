@@ -2,7 +2,6 @@ package mdplugin.generator.options;
 
 public class Resources {
 	public static String STANDARD_FORM = "StandardForm";
-	//public static String STORED_PROPERTY = "StoredProperty";
 	public static String UI_PROPERTY = "UIProperty";
 	public static String IMPORT_ENUM_PREFIX = "enumerations";
 	public static String IMPORT_EJB_PREFIX = "ejb";

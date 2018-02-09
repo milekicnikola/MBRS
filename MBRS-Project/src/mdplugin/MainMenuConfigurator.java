@@ -34,7 +34,7 @@ public class MainMenuConfigurator implements AMConfigurator
 		
 		if( category == null )
 		{
-			category = new MDActionsCategory("MBRS Generation", "MBRS Generation");
+			category = new MDActionsCategory("MBRS", "MBRS");
 			category.setNested(true);
 			mngr.addCategory(category);
 		}

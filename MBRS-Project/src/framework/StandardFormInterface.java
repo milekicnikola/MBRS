@@ -15,7 +15,6 @@ public interface StandardFormInterface {
 	
 	public void search();
 	public void refresh();
-	public void previousForm();
 	public void help();
 	
 	public void commit();

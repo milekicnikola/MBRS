@@ -24,14 +24,9 @@ public class MdPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		ActionsConfiguratorsManager manager = ActionsConfiguratorsManager.getInstance();		
 		manager.addMainMenuConfigurator(new MainMenuConfigurator(getSubmenuActions()));
 		
-		/** @Todo: load project options (@see myplugin.generator.options.ProjectOptions) from 
-		 * ProjectOptions.xml and take ejb generator options */	
-		
 		String currentDir = System.getProperty("user.dir");
 		String path = currentDir + "/GeneratedApp";
 		
-		
-		//for test purpose only:
 		GeneratorOptions classOptions = new GeneratorOptions(path, "class", "FMTemplates", "{0}.java", true, "ejb");
 		GeneratorOptions enumerationOptions = new GeneratorOptions(path, "enumeration", "FMTemplates", "{0}.java", true, "enumerations");
 		GeneratorOptions daoOptions = new GeneratorOptions(path, "dao", "FMTemplates", "{0}Dao.java", true, "dao");
@@ -50,7 +45,7 @@ public class MdPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("ActionGenerator", actionOptions);
 		ProjectOptions.getProjectOptions().getGeneratorOptions().put("PanelGenerator", panelOptions);
 		
-		classOptions.setTemplateDir(pluginDir + File.separator + classOptions.getTemplateDir()); //apsolutna putanja
+		classOptions.setTemplateDir(pluginDir + File.separator + classOptions.getTemplateDir());
 		enumerationOptions.setTemplateDir(pluginDir + File.separator + enumerationOptions.getTemplateDir());
 		daoOptions.setTemplateDir(pluginDir + File.separator + daoOptions.getTemplateDir());
 		hibernateDaoOptions.setTemplateDir(pluginDir + File.separator + hibernateDaoOptions.getTemplateDir());
@@ -61,7 +56,7 @@ public class MdPlugin extends com.nomagic.magicdraw.plugins.Plugin {
 	}
 
 	private NMAction[] getSubmenuActions() {
-		return new NMAction[] { new GenerateAction("Make MBRS"), };
+		return new NMAction[] { new GenerateAction("Generate Application"), };
 	}
 
 	public boolean close() {

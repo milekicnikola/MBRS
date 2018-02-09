@@ -12,38 +12,37 @@ import freemarker.template.Template;
 import mdplugin.generator.options.GeneratorOptions;
 
 /**
- * Abstract generator that creates necessary environment for code generation 
- * (creating directory for code generation, fetching template, creating file with given name 
- * for code generation etc). It should be ancestor for all generators in this project. 
-*/
+ * Abstract generator that creates necessary environment for code generation
+ * (creating directory for code generation, fetching template, creating file
+ * with given name for code generation etc). It should be ancestor for all
+ * generators in this project.
+ */
 
 public abstract class BasicGenerator {
 
-	private GeneratorOptions generatorOptions; 
-	private String outputPath;	
+	private String outputPath;
 	private String templateName;
 	private String templateDir;
 	private String outputFileName;
 	private boolean overwrite = false;
 	private String filePackage;
 	private Configuration cfg;
-	private Template template;	
-	
+	private Template template;
+
 	public BasicGenerator(GeneratorOptions generatorOptions) {
-		this.generatorOptions = generatorOptions;
 		this.outputPath = generatorOptions.getOutputPath();
 		this.templateName = generatorOptions.getTemplateName();
 		this.templateDir = generatorOptions.getTemplateDir();
 		this.outputFileName = generatorOptions.getOutputFileName();
 		this.overwrite = generatorOptions.getOverwrite();
 		this.filePackage = generatorOptions.getFilePackage();
-		
+
 	}
 
-	public void generate() throws IOException {		
+	public void generate() throws IOException {
 		if (outputPath == null) {
 			throw new IOException("Output path is not defined!");
-		}	
+		}
 		if (templateName == null) {
 			throw new IOException("Template name is not defined!");
 		}
@@ -54,7 +53,7 @@ public abstract class BasicGenerator {
 			throw new IOException("Package name for code generation is not defined!");
 		}
 
-		cfg = new Configuration();		
+		cfg = new Configuration();
 
 		final String tName = templateName + ".ftl";
 		try {
@@ -64,8 +63,7 @@ public abstract class BasicGenerator {
 			File op = new File(outputPath);
 			if (!op.exists())
 				if (!op.mkdirs()) {
-					throw new IOException(
-							"An error occurred during folder creation " + outputPath);
+					throw new IOException("An error occurred during folder creation " + outputPath);
 				}
 		} catch (IOException e) {
 			throw new IOException("Can't find template " + tName + ".", e);
@@ -75,21 +73,18 @@ public abstract class BasicGenerator {
 
 	public Writer getWriter(String fileNamePart, String packageName) throws IOException {
 		if (packageName != filePackage) {
-			packageName.replace(".", File.separator);		
+			packageName.replace(".", File.separator);
 			filePackage = packageName;
 		}
-			
-		String fullPath = outputPath
-				+ File.separator
-				+ (filePackage.isEmpty() ? "" : packageToPath(filePackage)
-						+ File.separator)
+
+		String fullPath = outputPath + File.separator
+				+ (filePackage.isEmpty() ? "" : packageToPath(filePackage) + File.separator)
 				+ outputFileName.replace("{0}", fileNamePart);
 
 		File of = new File(fullPath);
 		if (!of.getParentFile().exists())
 			if (!of.getParentFile().mkdirs()) {
-				throw new IOException("An error occurred during output folder creation "
-						+ outputPath);
+				throw new IOException("An error occurred during output folder creation " + outputPath);
 			}
 
 		if (!isOverwrite() && of.exists())
@@ -123,15 +118,15 @@ public abstract class BasicGenerator {
 	public void setTemplateName(String templateName) {
 		this.templateName = templateName;
 	}
-	
+
 	public void setTemplateDir(String templateDir) {
 		this.templateDir = templateDir;
 	}
 
 	public void setOutputFileName(String outputFileName) {
 		this.outputFileName = outputFileName;
-	}		
-	
+	}
+
 	public Configuration getCfg() {
 		return cfg;
 	}
@@ -155,7 +150,7 @@ public abstract class BasicGenerator {
 	public String getTemplateName() {
 		return templateName;
 	}
-	
+
 	public String getTemplateDir() {
 		return templateDir;
 	}

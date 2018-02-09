@@ -101,13 +101,6 @@ public class PanelAnalyzer extends BaseAnalyzer {
 
 		FMProperty prop = new FMProperty(attName, typeName, p.getVisibility().toString(), lower, upper);
 
-		/*
-		 * if (getTagValue(p, StereotypesHelper.getAppliedStereotypeByString(p,
-		 * Resources.UI_PROPERTY), "label") != null) { prop.setLblName( getTagValue(p,
-		 * StereotypesHelper.getAppliedStereotypeByString(p, Resources.UI_PROPERTY),
-		 * "label")); } else { prop.setLblName(prop.getName()); }
-		 */
-
 		if (typeName.equals("Boolean")) {
 
 			prop.setIsBoolean(true);
@@ -155,10 +148,7 @@ public class PanelAnalyzer extends BaseAnalyzer {
 				}
 			}
 		}
-
-		/**
-		 * Obrada stored property stereotipa
-		 */
+		
 		if (StereotypesHelper.getAppliedStereotypeByString(p, Resources.UI_PROPERTY) != null) {
 			Stereotype propStereotype = StereotypesHelper.getAppliedStereotypeByString(p, Resources.UI_PROPERTY);
 			if (getTagValue(p, propStereotype, "label") != null) {
@@ -168,23 +158,6 @@ public class PanelAnalyzer extends BaseAnalyzer {
 			}
 
 			prop.setRequired(new Boolean(getTagValue(p, propStereotype, "required")));
-
-			/*
-			 * String isTextField = getTagValue(p,propStereotype,"isTextField");
-			 * 
-			 * if(isTextField!= null){
-			 * 
-			 * if(isTextField.equals("true")){ prop.setIsTextField(true); }else
-			 * if(isTextField.equals("false")){ prop.setIsTextField(false); } }
-			 * 
-			 * 
-			 * String isTextArea = getTagValue(p,propStereotype,"isTextArea");
-			 * 
-			 * if(isTextArea!= null){
-			 * 
-			 * if(isTextArea.equals("true")){ prop.setIsTextArea(true); }else
-			 * if(isTextArea.equals("false")){ prop.setIsTextArea(false); } }
-			 */
 
 			String lengthString = getTagValue(p, propStereotype, "length");
 			if (lengthString == null) {
@@ -220,8 +193,6 @@ public class PanelAnalyzer extends BaseAnalyzer {
 			}
 
 			prop.setToolTip(getTagValue(p, propStereotype, "toolTip"));
-			// prop.setMigLayout(getTagValue(p,propStereotype,"migLayout"));
-			// prop.setMigLabel(getTagValue(p,propStereotype,"migLabel"));
 
 			String shownString = getTagValue(p, propStereotype, "shown");
 			if (shownString == null)

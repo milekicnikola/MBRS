@@ -14,7 +14,6 @@ public class FMModel {
 	private List<FMClass> classes = new ArrayList<FMClass>();
 	private List<FMEnumeration> enumerations = new ArrayList<FMEnumeration>();
 
-	// ....
 	/** @ToDo: Add lists of other elements, if needed */
 	private FMModel() {
 

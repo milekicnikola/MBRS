@@ -15,6 +15,11 @@ import gui.MenuBar;
 
 public class MainFrame extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2050762324543203799L;
+
 	public MainFrame() {
 		setTitle("MBRS Application");
 		Container content = getContentPane();

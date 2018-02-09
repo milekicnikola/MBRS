@@ -22,9 +22,9 @@ import mdplugin.generator.options.GeneratorOptions;
  *        complete ejb classes
  */
 
-public class EJBGenerator extends BasicGenerator {
+public class ClassGenerator extends BasicGenerator {
 
-	public EJBGenerator(GeneratorOptions generatorOptions) {
+	public ClassGenerator(GeneratorOptions generatorOptions) {
 		super(generatorOptions);
 	}
 

@@ -2,17 +2,13 @@ package mdplugin;
 
 import java.awt.event.ActionEvent;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-
-import org.apache.commons.io.FileUtils;
 
 import com.nomagic.magicdraw.actions.MDAction;
 import com.nomagic.magicdraw.core.Application;
@@ -29,8 +25,8 @@ import mdplugin.analyzer.HibernateAnalyzer;
 import mdplugin.analyzer.MenuBarAnalyzer;
 import mdplugin.analyzer.PanelAnalyzer;
 import mdplugin.generator.ActionGenerator;
+import mdplugin.generator.ClassGenerator;
 import mdplugin.generator.DaoGenerator;
-import mdplugin.generator.EJBGenerator;
 import mdplugin.generator.EnumerationGenerator;
 import mdplugin.generator.HibernateGenerator;
 import mdplugin.generator.MenuBarGenerator;
@@ -42,10 +38,16 @@ import mdplugin.generator.options.ProjectOptions;
 /** Action that activate code generation */
 class GenerateAction extends MDAction {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1234974559373417487L;
+
 	public GenerateAction(String name) {
 		super("", name, null, null);
 	}
 
+	@SuppressWarnings("deprecation")
 	public void actionPerformed(ActionEvent evt) {
 
 		if (Application.getInstance().getProject() == null)
@@ -81,7 +83,7 @@ class GenerateAction extends MDAction {
 
 			classAnalyzer.prepareModel();
 			GeneratorOptions goClass = ProjectOptions.getProjectOptions().getGeneratorOptions().get("ClassGenerator");
-			EJBGenerator ejbGenerator = new EJBGenerator(goClass);
+			ClassGenerator ejbGenerator = new ClassGenerator(goClass);
 			ejbGenerator.generate();
 
 			actionAnalyzer.prepareModel();
@@ -106,7 +108,6 @@ class GenerateAction extends MDAction {
 			PanelGenerator generatePanel = new PanelGenerator(goPanel);
 			generatePanel.generate();
 
-			/** @ToDo: Also call other generators */
 			JOptionPane.showMessageDialog(null,
 					"Code is successfully generated! Generated code is in folder: " + goClass.getOutputPath());
 

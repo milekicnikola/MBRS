@@ -17,69 +17,71 @@ import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 
 public class StandardPanel extends JPanel {
-	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2954730970343985677L;
 	private JButton btnCommit;;
 	private JButton btnCancel;
 	private JPanel pnlButtons;
-	
-	private JPanel pnlData;
+
 	private JLabel lblStatus;
-	
+
 	public StandardPanel(final StandardForm form, JPanel pnlData) {
-		this.pnlData = pnlData;
 		setLayout(new BorderLayout());
-		
+
 		btnCommit = new JButton(new ImageIcon("images/commit.png"));
 		btnCommit.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				form.commit();
 			}
 		});
-		
+
 		btnCancel = new JButton(new ImageIcon("images/cancel.png"));
 		btnCancel.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				form.cancel();
 			}
 		});
-		
+
 		pnlButtons = new JPanel();
 		BoxLayout box = new BoxLayout(pnlButtons, BoxLayout.Y_AXIS);
 		pnlButtons.setLayout(box);
 		pnlButtons.add(btnCommit);
 		pnlButtons.add(btnCancel);
-		
+
 		JPanel statusBar = new JPanel();
 		statusBar.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 		lblStatus = new JLabel("State: EDIT");
 		statusBar.add(lblStatus);
-		
+
 		add(pnlData, BorderLayout.CENTER);
 		add(pnlButtons, BorderLayout.EAST);
 		add(statusBar, BorderLayout.SOUTH);
 	}
-	
-	public void clearDataPanel(JPanel panel){
+
+	public void clearDataPanel(JPanel panel) {
 		Component[] components = panel.getComponents();
-		for(Component c : components){
-			if(c instanceof JTextField){
+		for (Component c : components) {
+			if (c instanceof JTextField) {
 				((JTextField) c).setText("");
 			}
-			if(c instanceof JPanel){
+			if (c instanceof JPanel) {
 				clearDataPanel((JPanel) c);
 			}
-			if(c instanceof JScrollPane){
-				JTextArea txtArea = (JTextArea)((JScrollPane)c).getViewport().getView();
+			if (c instanceof JScrollPane) {
+				JTextArea txtArea = (JTextArea) ((JScrollPane) c).getViewport().getView();
 				txtArea.setText("");
 			}
 		}
 	}
-	
-	public void changeStatus(int status){
+
+	public void changeStatus(int status) {
 		switch (status) {
 		case 0:
 			lblStatus.setText("State: ADD");
@@ -90,12 +92,12 @@ public class StandardPanel extends JPanel {
 			lblStatus.setText("State: EDIT");
 			setVisible(true);
 			break;
-		
+
 		case 2:
 			lblStatus.setText("State: SEARCH");
 			setVisible(true);
 			break;
 		}
 	}
-	
+
 }

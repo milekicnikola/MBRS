@@ -7,6 +7,10 @@ import javax.swing.table.DefaultTableModel;
 
 public class StandardTableModel<T extends EntityAbstract> extends DefaultTableModel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6665505613762799964L;
 	private DaoGeneric<T> dao;
 
 	public StandardTableModel(DaoGeneric<T> dao, String[] columnLabels) {

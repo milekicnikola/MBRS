@@ -35,7 +35,6 @@
 		<mkdir dir="${MAGICDRAW_HOME}/plugins/mdplugin"/>
 		<copy file="dist/mdplugin.jar" todir="${MAGICDRAW_HOME}/plugins/mdplugin"/>
 		<copy file="resources/plugin.xml" todir="${MAGICDRAW_HOME}/plugins/mdplugin"/>
-		<copy file="resources/ProjectOptions.xml" todir="${MAGICDRAW_HOME}/plugins/mdplugin"/>
 		<copy todir="${MAGICDRAW_HOME}/plugins/mdplugin">
 			<fileset dir="lib" includes="*.jar"/>
 		</copy>

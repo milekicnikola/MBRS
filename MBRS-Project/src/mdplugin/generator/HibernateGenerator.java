@@ -33,7 +33,7 @@ public class HibernateGenerator extends BasicGenerator {
 		List<String> packages = new ArrayList<String>();
 		List<String> packagesToMenus = new ArrayList<String>();
 		List<String> imports = new ArrayList<String>();
-		
+
 		Writer out;
 		Map<String, Object> context = new HashMap<String, Object>();
 		try {

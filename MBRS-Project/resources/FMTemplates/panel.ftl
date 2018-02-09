@@ -1,19 +1,12 @@
 package ${class.typePackage};
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.sql.SQLException;
 import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JFrame;
 import javax.swing.JComboBox;
-import javax.swing.JButton;
 import java.util.ArrayList;
 import java.util.List;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
@@ -36,10 +29,12 @@ import framework.*;
 import net.miginfocom.swing.MigLayout;
 
 ${class.visibility} class ${class.name}Panel extends JPanel{
-
+	/**
+	* 
+	*/
+	private static final long serialVersionUID = 1L;
 	
-	<#list properties as property>
-		
+	<#list properties as property>		
 		<#if property.upper == 1 && property.foreignKey == false && property.isBoolean == false && property.component != "comboBox" && property.component != "textArea"> 
 			<#if property.component == "textField">
 				private  JTextField tf${property.name} = new JTextField(${property.length});
@@ -122,22 +117,6 @@ ${class.visibility} class ${class.name}Panel extends JPanel{
 					combo${property.name}.addItem(c);
 				}
 				add(combo${property.name},"gapleft 30");
-				//JButton btnZoom${property.name} = new JButton("...");
-				//btnZoom${property.name}.addActionListener(new ActionListener() {
-					
-				//	@Override
-				//	public void actionPerformed(ActionEvent arg0) {
-				//${property.name?cap_first} ${property.name}	= new ${property.name?cap_first}();
-				//		StandardForm form = new StandardForm((EntityInterface)${property.name}, dao${property.name}, new ${property.name?cap_first}Panel());
-				//		form.setCmbForZoom(combo${property.name});
-				//		form.setModal(true);
-				//		form.setLocationRelativeTo(null);
-				//		form.setVisible(true);
-				//	}
-				//});
-				
-				
-				//add( btnZoom${property.name},"grow 0,wrap 20");
 		    </#if> 
 		    
 		    <#if property.upper == 1 && property.isBoolean == true >   

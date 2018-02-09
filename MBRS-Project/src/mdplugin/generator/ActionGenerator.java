@@ -18,36 +18,35 @@ public class ActionGenerator extends BasicGenerator {
 	public ActionGenerator(GeneratorOptions generatorOptions) {
 		super(generatorOptions);
 	}
-	
+
 	public void generate() {
-		
+
 		try {
 			super.generate();
-		} catch (IOException e) {		
+		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
 
 		List<FMClass> classes = FMModel.getInstance().getClasses();
 		for (int i = 0; i < classes.size(); i++) {
-			FMClass cl = classes.get(i);			
-				Writer out;
-				Map<String, Object> context = new HashMap<String, Object>();
-				try {
-					out = getWriter(cl.getName(), cl.getTypePackage());
-					if (out != null) {
-						context.clear();
-						context.put("class", cl);		
-						context.put("importedPackages", cl.getImportedPackages());					
-						getTemplate().process(context, out);
-						out.flush();
-					}
-				} catch (TemplateException e) {	
-					JOptionPane.showMessageDialog(null, e.getMessage());
-				}	
-				catch (IOException e) {
-					JOptionPane.showMessageDialog(null, e.getMessage());
-				}	
-			}			
+			FMClass cl = classes.get(i);
+			Writer out;
+			Map<String, Object> context = new HashMap<String, Object>();
+			try {
+				out = getWriter(cl.getName(), cl.getTypePackage());
+				if (out != null) {
+					context.clear();
+					context.put("class", cl);
+					context.put("importedPackages", cl.getImportedPackages());
+					getTemplate().process(context, out);
+					out.flush();
+				}
+			} catch (TemplateException e) {
+				JOptionPane.showMessageDialog(null, e.getMessage());
+			} catch (IOException e) {
+				JOptionPane.showMessageDialog(null, e.getMessage());
+			}
 		}
+	}
 
 }

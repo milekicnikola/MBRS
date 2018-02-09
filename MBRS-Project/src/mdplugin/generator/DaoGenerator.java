@@ -39,8 +39,6 @@ public class DaoGenerator extends BasicGenerator {
 					context.put("class", cl);
 					context.put("properties", cl.getProperties());
 					context.put("importedPackages", cl.getImportedPackages());
-					// JOptionPane.showMessageDialog(null, context.values().toString() + " razmak "
-					// + out.toString());
 					getTemplate().process(context, out);
 					out.flush();
 				}

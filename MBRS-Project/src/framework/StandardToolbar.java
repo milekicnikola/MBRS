@@ -9,9 +9,12 @@ import javax.swing.JToolBar;
 
 public class StandardToolbar extends JToolBar {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4227471537609545859L;
 	private JButton btnSearch;
 	private JButton btnRefresh;
-	//private JButton btnPreviousForm;
 	private JButton btnHelp;
 	
 	private JButton btnFirstRow;
@@ -48,18 +51,6 @@ public class StandardToolbar extends JToolBar {
 			}
 		});
 		add(btnRefresh);
-		
-		/*btnPreviousForm = new JButton(new ImageIcon("images/previous.png"));
-		btnPreviousForm.setToolTipText("Previous form");
-		btnPreviousForm.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				form.previousForm();
-			}
-		});
-		
-		add(btnPreviousForm);*/
 		
 		btnHelp = new JButton(new ImageIcon("images/help.png"));
 		btnHelp.setToolTipText("Help");
@@ -163,10 +154,6 @@ public class StandardToolbar extends JToolBar {
 	public JButton getBtnRefresh() {
 		return btnRefresh;
 	}
-
-	/*public JButton getBtnPickup() {
-		return btnPickup;
-	}*/
 
 	public JButton getBtnHelp() {
 		return btnHelp;

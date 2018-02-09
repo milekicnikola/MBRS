@@ -3,7 +3,6 @@ package gui;
 <#list packages as package>
 import ${package}.*;
 </#list>
-import gui.actions.*;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
