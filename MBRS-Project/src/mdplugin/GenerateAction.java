@@ -2,17 +2,13 @@ package mdplugin;
 
 import java.awt.event.ActionEvent;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-
-import org.apache.commons.io.FileUtils;
 
 import com.nomagic.magicdraw.actions.MDAction;
 import com.nomagic.magicdraw.core.Application;
@@ -119,27 +115,6 @@ class GenerateAction extends MDAction {
 		} catch (AnalyzeException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
-		
-		try {
-
-		String srcPath = "D:\\Master\\MBRS\\MBRSGIT\\MBRS-Project\\images";
-
-		String currentDir = System.getProperty("user.dir");
-		String destPath = currentDir + "/GeneratedApp";
-
-		JOptionPane.showMessageDialog(null, srcPath + "   " + destPath);
-
-		File srcDir = new File(srcPath);
-		File destDir = new File(destPath);
-
-		
-		FileUtils.copyDirectory(srcDir, destDir);
-		
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 
 	}
 

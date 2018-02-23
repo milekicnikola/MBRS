@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="lib" path="D:/Master/MBRS/MBRSGIT/MBRS-Project/genlib/antlr-2.7.7.jar"/>
+	<classpathentry kind="lib" path="D:/Master/MBRS/MBRSGIT/MBRS-Project/genlib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="D:/Master/MBRS/MBRSGIT/MBRS-Project/genlib/hibernate-commons-annotations-4.0.2.Final.jar"/>
+	<classpathentry kind="lib" path="D:/Master/MBRS/MBRSGIT/MBRS-Project/genlib/hibernate-core-4.2.8.Final.jar"/>
+	<classpathentry kind="lib" path="D:/Master/MBRS/MBRSGIT/MBRS-Project/genlib/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
+	<classpathentry kind="lib" path="D:/Master/MBRS/MBRSGIT/MBRS-Project/genlib/hibernate-validator-4.0.2.GA.jar"/>
+	<classpathentry kind="lib" path="D:/Master/MBRS/MBRSGIT/MBRS-Project/genlib/hibernate-validator-annotation-processor-4.1.0.Final.jar"/>
+	<classpathentry kind="lib" path="D:/Master/MBRS/MBRSGIT/MBRS-Project/genlib/javassist-3.18.1-GA.jar"/>
+	<classpathentry kind="lib" path="D:/Master/MBRS/MBRSGIT/MBRS-Project/genlib/jboss-logging-3.1.0.GA.jar"/>
+	<classpathentry kind="lib" path="D:/Master/MBRS/MBRSGIT/MBRS-Project/genlib/jboss-transaction-api_1.1_spec-1.0.1.Final.jar"/>
+	<classpathentry kind="lib" path="D:/Master/MBRS/MBRSGIT/MBRS-Project/genlib/jdatepicker-1.3.2.jar"/>
+	<classpathentry kind="lib" path="D:/Master/MBRS/MBRSGIT/MBRS-Project/genlib/miglayout-3.7.jar"/>
+	<classpathentry kind="lib" path="D:/Master/MBRS/MBRSGIT/MBRS-Project/genlib/mysql-connector-java-5.1.25-bin.jar"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
